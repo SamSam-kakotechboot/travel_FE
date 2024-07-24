@@ -11,7 +11,9 @@ npm install eslint prettier eslint-plugin-prettier eslint-config-prettier --save
 (VsCode의 ESLint, Prettier - Code formatter 설치 필요)
 
 tailwind 설치 관련 참고
-https://velog.io/@mjieun/React-React%EC%97%90%EC%84%9C-Tailwind-CSS-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+(.eslintrc, .prettier, tailwind.config.js, vite 설정은 github에 같이 동봉하였음)
 
 ## 로컬 환경 구성
 
