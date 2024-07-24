@@ -1,17 +1,30 @@
 # travel_FE
+
 지능형 여행 및 생활 어시스턴트 : 사용자 맞춤형 여행 정보 및 생활 정보를 제공하는 지능형 어시스턴트 개발
 
 # Getting Started
-지능형 여행 및 생활 어시스턴트 : 사용자 맞춤형 여행 정보 및 생활 정보를 제공하는 지능형 어시스턴트 개발
+
+npm install
+npm create vite@latest(React, js) 선택
+npm install @reduxjs/toolkit react-redux
+npm install eslint prettier eslint-plugin-prettier eslint-config-prettier --save-dev
+(VsCode의 ESLint, Prettier - Code formatter 설치 필요)
+
+tailwind 설치 관련 참고
+https://velog.io/@mjieun/React-React%EC%97%90%EC%84%9C-Tailwind-CSS-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
 
 ## 로컬 환경 구성
+
 미정
 
 ### CI
+
 미정
 
 ### Branch 전략
+
 Git-flow 전략을 따름
+
 - main : 제품으로 출시될 수 있는 브랜치
 - develop : 다음 출시 버전을 개발하는 브랜치
 - feature : 기능을 개발하는 브랜치
@@ -21,6 +34,7 @@ Git-flow 전략을 따름
 [참고](https://techblog.woowahan.com/2553/)
 
 ### 커밋 메시지 컨벤션
+
 한글로 작성  
 기본 원칙 : 1 Action 1 Commit(최대한 작게 쪼개 한 커밋에 하나의 기능만 커밋되도룍)
 
@@ -36,18 +50,21 @@ Git-flow 전략을 따름
 - remove : 파일 혹은 폴더 삭제 작업만 진행된 경우
 
 ### DB 접속정보
+
 서버 DB 접속 정보
 
 ### Local DB
+
 DB 정보
 
 ### openjdk 1.11 설치
-미정
 
+미정
 
 ### 테스트 테이블 및 데이터
 
 예시입니다.
+
 ```
 CREATE TABLE `Sample` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
@@ -74,16 +91,21 @@ INSERT INTO `Sample` (`name`,`status`,`birthDate`,`useYn`,`createdDatetime`,`cre
 ```
 
 ### aws config 파일 생성
+
 미정
 
 ### aws credential 파일 생성
+
 미정
 
 ### docker 세팅
+
 미정
 
 ### aws config 파일 생성
+
 미정
 
 ### aws credential 파일 생성
+
 미정
