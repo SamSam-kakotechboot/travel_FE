@@ -1,10 +1,10 @@
 export default function HomeProduct() {
   return (
-    <div className="flex flex-col items-center bg-background rounded-[20px] overflow-hidden w-[295px] h-auto p-4">
+    <div className="flex flex-col items-center bg-background overflow-hidden w-[300px] h-auto p-4">
       <div className="w-full h-[298px]">
         <img
-          className="w-full h-full object-cover"
-          src="https://via.placeholder.com/296x335"
+          className="w-full h-full object-cover rounded-xl"
+          src="https://via.placeholder.com/280x335"
           alt="DisneyLand Paris"
         />
       </div>

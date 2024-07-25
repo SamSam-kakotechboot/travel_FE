@@ -1,4 +1,9 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 export default function Header() {
+  const navigate = useNavigate();
+
   return (
     <header className="flex items-center justify-between px-8 py-6 bg-white shadow-md w-full">
       <div className="text-black text-4xl font-poppins font-bold">SamSam</div>
@@ -12,7 +17,12 @@ export default function Header() {
       </div>
       <div className="flex items-center gap-6">
         <span className="material-icons text-black">shopping_cart</span>
-        <span className="material-icons text-black">account_circle</span>
+        <span
+          className="material-icons text-black cursor-pointer"
+          onClick={() => navigate('/login')}
+        >
+          account_circle
+        </span>
       </div>
     </header>
   );
