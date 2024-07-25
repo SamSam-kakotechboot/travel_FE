@@ -6,7 +6,12 @@ export default function Header() {
 
   return (
     <header className="flex items-center justify-between px-8 py-6 bg-white shadow-md w-full">
-      <div className="text-black text-4xl font-poppins font-bold">SamSam</div>
+      <div
+        className="text-black text-4xl font-poppins font-bold"
+        onClick={() => navigate('/')}
+      >
+        SamSam
+      </div>
       <div className="flex flex-1 items-center bg-[#F0F0F0] rounded-full mx-8 px-4">
         <span className="material-icons text-gray-400 mr-2">search</span>
         <input

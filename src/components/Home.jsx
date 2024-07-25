@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import HomeProduct from './HomeProduct';
 
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <div className="relative bg-white min-h-">
       <Header />
@@ -15,7 +17,10 @@ export default function Home() {
           ))}
         </div>
         <div className="flex justify-center mt-8">
-          <button className="px-6 py-3 text-black text-base font-poppins font-medium border border-gray-200 rounded-full hover:bg-gray-100">
+          <button
+            className="px-6 py-3 text-black text-base font-poppins font-medium border border-gray-200 rounded-full hover:bg-gray-100"
+            onClick={() => navigate('/tickets')}
+          >
             View All
           </button>
         </div>
