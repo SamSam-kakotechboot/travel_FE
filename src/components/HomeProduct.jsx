@@ -1,6 +1,16 @@
-export default function HomeProduct() {
+import { useNavigate } from 'react-router-dom';
+
+export default function HomeProduct({ id }) {
+  const navigate = useNavigate();
+  const handleProductClick = () => {
+    navigate(`/tickets/${id}`);
+  };
+
   return (
-    <div className="flex flex-col items-center bg-background overflow-hidden w-[300px] h-auto p-4">
+    <div
+      onClick={handleProductClick}
+      className="flex flex-col items-center bg-background overflow-hidden w-[300px] h-auto p-4"
+    >
       <div className="w-full h-[298px]">
         <img
           className="w-full h-full object-cover rounded-xl"
