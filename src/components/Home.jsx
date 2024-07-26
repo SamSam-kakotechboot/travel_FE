@@ -12,7 +12,7 @@ export default function Home() {
           NEW ARRIVALS
         </div>
         <div className="flex flex-wrap justify-start gap-3">
-          {[...Array(6)].map((_, index) => (
+          {[...Array(4)].map((_, index) => (
             <HomeProduct />
           ))}
         </div>
