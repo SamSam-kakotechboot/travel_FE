@@ -20,10 +20,10 @@ export default function CartDetail() {
   return (
     <div className="flex-1 bg-white py-3 px-5 rounded-lg border border-black border-opacity-10 ">
       <div className="space-y-4">
-        {[...Array(3)].map((_, index) => (
+        {[...Array(3)].map((_, index, array) => (
           <div
             key={index}
-            className="flex w-full items-center gap-6 p-2 bg-white border-b border-gray-100"
+            className={`flex w-full items-center gap-6 p-2 bg-white ${index !== array.length - 1 ? 'border-b border-gray-100' : ''}`}
           >
             <div className="bg-zinc-100 rounded-lg justify-center items-center flex ">
               <img
@@ -64,9 +64,7 @@ export default function CartDetail() {
                 </button>
               </div>
             </div>
-            
           </div>
-          
         ))}
       </div>
     </div>
