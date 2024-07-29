@@ -1,7 +1,6 @@
 import Header from './Header';
-import CartTotal from './CartTotal';
 import CartIcon from './icons/CartIcon';
-import CartDetail from './CartDetail';
+import MyOrderList from './MyOrderList';
 
 export default function MyOrder() {
   return (
@@ -10,11 +9,10 @@ export default function MyOrder() {
       <div className="flex flex-col min-h-screen bg-white p-8">
         <div className="flex items-center mb-8 mt-2">
           <CartIcon className="w-12 h-12 mr-3" />
-          <h2 className="text-4xl font-semibold">OO님의 장바구니</h2>
+          <h2 className="text-4xl font-semibold">OO님의 주문내역</h2>
         </div>
         <div className="w-full mx-auto flex gap-8 bg-white">
-          {/* 왼쪽: 카트 정보 */}
-          <CartDetail />
+          <MyOrderList />
         </div>
       </div>
     </div>
