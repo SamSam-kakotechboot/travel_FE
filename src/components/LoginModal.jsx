@@ -1,6 +1,6 @@
 export default function LoginModal() {
   return (
-    <div className="flex justify-between items-center max-w-md w-full p-4 bg-white shadow-md rounded-lg">
+    <div className="flex justify-between items-center max-w-md w-full p-4 bg-white shadow-md rounded-lg border">
       <div className="flex flex-col justify-center p-8">
         <h2 className="text-2xl font-light font-poppins mb-6">
           Welcome to SamSam!
