@@ -22,8 +22,6 @@ npm install -D tailwindcss postcss autoprefixer
 
 npx tailwindcss init -p
 
-(.eslintrc, .prettier, tailwind.config.js, vite 설정은 github에 같이 동봉하였음)
-
 ## 로컬 환경 구성
 
 미정
