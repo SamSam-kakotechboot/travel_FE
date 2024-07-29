@@ -18,12 +18,12 @@ export default function CartDetail() {
   };
 
   return (
-    <div className="flex-1 bg-white p-6 rounded-lg shadow-md">
+    <div className="flex-1 bg-white py-3 px-5 rounded-lg border border-gray-100">
       <div className="space-y-4">
-        {[...Array(3)].map((_, index) => (
+        {[...Array(3)].map((_, index, array) => (
           <div
             key={index}
-            className="flex w-full items-center gap-6 p-4 bg-white rounded-lg shadow-sm"
+            className={`flex w-full items-center gap-6 p-2 bg-white ${index !== array.length - 1 ? 'border-b border-gray-100' : ''}`}
           >
             <div className="bg-zinc-100 rounded-lg justify-center items-center flex ">
               <img
@@ -32,7 +32,7 @@ export default function CartDetail() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="h-[118px] flex flex-col justify-between items-start">
+            <div className="h-[154px] flex flex-col justify-between items-start ">
               <div className="flex flex-col justify-start items-start gap-[2px]">
                 <div className="text-black text-[20px] font-poppins font-bold break-words">
                   DisneyLand Paris
@@ -44,7 +44,7 @@ export default function CartDetail() {
               </div>
             </div>
             <div className="flex-grow" />
-            <div className="w-[225px] h-[124px] flex flex-col justify-between items-end">
+            <div className="w-[225px] h-[180px] flex flex-col justify-between items-end">
               <TrashCanIcon isClickable={true} onClick={() => {}} />
               <div className="quantity-button w-[170px] h-[56px] flex items-center rounded-full bg-[#F0F0F0] px-4">
                 <button
@@ -53,7 +53,7 @@ export default function CartDetail() {
                 >
                   -
                 </button>
-                <div className="quantity-display flex-1 text-xl text-sm italic text-center">
+                <div className="quantity-display flex-1 text-xl italic text-center">
                   {quantities[index]}
                 </div>
                 <button
