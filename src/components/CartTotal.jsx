@@ -1,6 +1,6 @@
 export default function CartTotal() {
   return (
-    <div className="h-72 w-128 max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div className="h-72 w-128 max-w-md mx-auto bg-white p-6 rounded-lg border border-black border-opacity-10 p-6 rounded-lg">
       <h2 className="text-2xl font-bold mb-6">주문 정보</h2>
       <div className="space-y-2">
         <div className="flex justify-between">
