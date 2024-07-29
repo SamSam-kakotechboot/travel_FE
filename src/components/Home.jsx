@@ -13,7 +13,7 @@ export default function Home() {
         </div>
         <div className="flex flex-wrap justify-start gap-3">
           {[...Array(4)].map((_, index) => (
-            <HomeProduct />
+            <HomeProduct key={index} />
           ))}
         </div>
         <div className="flex justify-center mt-8">

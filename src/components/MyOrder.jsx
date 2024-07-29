@@ -2,10 +2,8 @@ import Header from './Header';
 import CartTotal from './CartTotal';
 import CartIcon from './icons/CartIcon';
 import CartDetail from './CartDetail';
-import { useNavigate } from 'react-router-dom';
 
-export default function Cart() {
-  const navigate = useNavigate();
+export default function MyOrder() {
   return (
     <div className="relative bg-white">
       <Header />
@@ -17,13 +15,6 @@ export default function Cart() {
         <div className="w-full mx-auto flex gap-8 bg-white">
           {/* 왼쪽: 카트 정보 */}
           <CartDetail />
-          {/* 오른쪽: 결제 정보 */}
-          <div className="flex flex-col">
-            <CartTotal />
-            <button onClick={() => navigate('/myorder')}>
-              임시 버튼(내 장바구니 보기용)
-            </button>
-          </div>
         </div>
       </div>
     </div>

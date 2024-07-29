@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import StarIcon from './icons/StarIcon';
+import HalfStarIcon from './icons/HalfStarIcon';
 
 export default function HomeProduct({ id }) {
   const navigate = useNavigate();
@@ -23,11 +25,9 @@ export default function HomeProduct({ id }) {
       </div>
       <div className="flex items-center gap-[2px] mt-2">
         {[...Array(4)].map((_, i) => (
-          <span key={i} className="material-icons text-yellow-500">
-            star
-          </span>
+          <StarIcon key={i}></StarIcon>
         ))}
-        <span className="material-icons text-yellow-500">star_half</span>
+        <HalfStarIcon />
         <span className="text-black text-sm font-poppins font-normal ml-2">
           4.5/5
         </span>

@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import CartIcon from './icons/CartIcon';
+import AccountIcon from './icons/AccountIcon';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -21,18 +23,8 @@ export default function Header() {
         />
       </div>
       <div className="flex items-center gap-6">
-        <span
-          className="material-icons text-black cursor-pointer"
-          onClick={() => navigate('/cart')}
-        >
-          shopping_cart
-        </span>
-        <span
-          className="material-icons text-black cursor-pointer"
-          onClick={() => navigate('/login')}
-        >
-          account_circle
-        </span>
+        <CartIcon isClickable={true} onClick={() => navigate('/cart')} />
+        <AccountIcon isClickable={true} onClick={() => navigate('/login')} />
       </div>
     </header>
   );
