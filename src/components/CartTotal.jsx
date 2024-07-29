@@ -1,6 +1,6 @@
 export default function CartTotal() {
   return (
-    <div className="h-72 w-128 max-w-md mx-auto bg-white p-6 rounded-lg border border-black border-opacity-10 p-6 rounded-lg">
+    <div className="h-72 w-128 max-w-md mx-auto bg-white p-6 rounded-lg border border-gray-100 p-6 rounded-lg">
       <h2 className="text-2xl font-bold mb-6">주문 정보</h2>
       <div className="space-y-2">
         <div className="flex justify-between">
@@ -13,7 +13,7 @@ export default function CartTotal() {
           </span>
           <span className="text-black text-xl font-black">0₩</span>
         </div>
-        <div className="border-t border-gray-300 my-4"></div>
+        <div className="border border-gray-100 my-4"></div>
         <div className="flex justify-between font-semibold">
           <span className="text-xl font-medium">Total</span>
           <span className="text-black text-2xl font-black">212,000₩</span>

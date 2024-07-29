@@ -18,7 +18,7 @@ export default function CartDetail() {
   };
 
   return (
-    <div className="flex-1 bg-white py-3 px-5 rounded-lg border border-black border-opacity-10 ">
+    <div className="flex-1 bg-white py-3 px-5 rounded-lg border border-gray-100">
       <div className="space-y-4">
         {[...Array(3)].map((_, index, array) => (
           <div
