@@ -11,7 +11,7 @@ const Reviews = ({ id }) => {
         <div className="flex items-center justify-between mb-[60px]">
           <div className="flex items-center">
             <h2 className="text-2xl font-bold text-black mr-2">All Reviews</h2>
-            <span className="text-gray-500 text-sm">(51)</span>
+            <span className="text-gray-500 text-sm italic">(51)</span>
           </div>
           <BlackButton width="166px" height="48px" text="리뷰 작성" />
         </div>
