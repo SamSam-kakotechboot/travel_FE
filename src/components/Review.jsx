@@ -15,15 +15,15 @@ const Review = ({ reviewer, score, content, date, imgUrl }) => {
           {Array.from({ length: 5 }, (_, index) => (
             <div key={index} className="star">
               {index < fullStars ? (
-                <StarIcon />
+                <StarIcon className="w-6 h-6 ml-[3px]" />
               ) : index === fullStars && hasHalfStar ? (
-                <HalfStarIcon />
+                <HalfStarIcon className="w-6 h-6" />
               ) : null}
             </div>
           ))}
         </div>
         {/* Review Section */}
-        <div className="review-content flex flex-col h-full">
+        <div className="review-content flex flex-col h-full ml-[3px]">
           <div className="reviewer text-[14px] font-semibold mb-[8px]">
             {reviewer}
           </div>
