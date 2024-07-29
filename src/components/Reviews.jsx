@@ -1,13 +1,14 @@
 import React from 'react';
 import BlackButton from './BlackButton';
 import Review from './Review';
+import PageButtons from './PageButtons';
 
 const Reviews = ({ id }) => {
   return (
     <div className="flex justify-center">
       <div className="reviews-container w-[1200px] mt-[30px]">
         {/* Header and Button Section */}
-        <div className="flex items-center justify-between mb-[20px]">
+        <div className="flex items-center justify-between mb-[60px]">
           <div className="flex items-center">
             <h2 className="text-2xl font-bold text-black mr-2">All Reviews</h2>
             <span className="text-gray-500 text-sm">(51)</span>
@@ -20,7 +21,9 @@ const Reviews = ({ id }) => {
           <Review
             reviewer={'ddd'}
             score={3.5}
-            content={'에후에후'}
+            content={
+              '너무 재밌었어요~~ 어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고'
+            }
             date={'2023.03.03'}
             imgUrl={'https://via.placeholder.com/265x170'}
           />
@@ -40,6 +43,10 @@ const Reviews = ({ id }) => {
             date={'2024.07.28'}
             imgUrl={'https://via.placeholder.com/265x170'}
           />
+        </div>
+
+        <div className="flex justify-center mt-[80px] mb-[30px]">
+          <PageButtons />
         </div>
       </div>
     </div>
