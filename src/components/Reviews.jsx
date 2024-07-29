@@ -1,9 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import BlackButton from './BlackButton';
 import Review from './Review';
 import PageButtons from './PageButtons';
 
 const Reviews = ({ id }) => {
+  const navigate = useNavigate();
+  const handleReviewButtonClick = () => {
+    navigate(`/tickets/${id}/review-form`);
+  };
+
   return (
     <div className="flex justify-center">
       <div className="reviews-container w-[1200px] mt-[30px]">
@@ -13,7 +19,12 @@ const Reviews = ({ id }) => {
             <h2 className="text-2xl font-bold text-black mr-2">All Reviews</h2>
             <span className="text-gray-500 text-sm italic">(51)</span>
           </div>
-          <BlackButton width="166px" height="48px" text="리뷰 작성" />
+          <BlackButton
+            width="166px"
+            height="48px"
+            text="리뷰 작성"
+            onClick={handleReviewButtonClick}
+          />
         </div>
 
         {/* Reviews Content Section */}
