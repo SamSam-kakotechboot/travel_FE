@@ -3,6 +3,7 @@ import StarIcon from './icons/StarIcon';
 import HalfStarIcon from './icons/HalfStarIcon';
 import InfoIcon from './icons/InfoIcon';
 import KeywordRectangle from './KeywordRectangle';
+import BlackButton from './BlackButton';
 
 const TicketInfo = ({ id }) => {
   const [quantity, setQuantity] = useState(1);
@@ -77,7 +78,7 @@ const TicketInfo = ({ id }) => {
               어쩌고 저쩌고 어쩌고 저쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 ...
             </div>
           </div>
-          <div className="gray-line w-full h-[1px] bg-gray-300 mt-5"></div>
+          <div className="gray-line w-full h-[1px] bg-gray-100 mt-5"></div>
           {/* Ticket Menu Section */}
           <div className="ticket-menu-wrapper flex gap-5 mt-6 flex-wrap justify-between">
             {/* Quantity Control */}
@@ -100,14 +101,17 @@ const TicketInfo = ({ id }) => {
                 </button>
               </div>
             </div>
-            <button className="cart-button w-[300px] h-[56px] px-[54px] py-[16px] flex justify-center items-center gap-3 rounded-full bg-black text-white">
-              장바구니 담기
-            </button>
+            <BlackButton
+              width="300px"
+              height="56px"
+              text="장바구니 담기"
+              onClick={() => alert('장바구니에 담겼습니다.')}
+            />
           </div>
         </div>
       </div>
       <div className="w-full flex justify-center mt-10">
-        <div className="gray-line w-[1200px] max-w-screen-xl h-[1px] bg-gray-300"></div>
+        <div className="gray-line w-[1200px] max-w-screen-xl h-[1px] bg-gray-100"></div>
       </div>
     </div>
   );
