@@ -5,9 +5,9 @@ export default function Header() {
   const navigate = useNavigate();
 
   return (
-    <header className="flex items-center justify-between px-8 py-6 bg-white shadow-md w-full">
+    <header className="flex items-center justify-between px-8 py-6 bg-white shadow-lg w-full z-10 relative">
       <div
-        className="text-black text-4xl font-poppins font-bold"
+        className="text-black text-4xl font-poppins font-bold cursor-pointer"
         onClick={() => navigate('/')}
       >
         SamSam
@@ -21,7 +21,12 @@ export default function Header() {
         />
       </div>
       <div className="flex items-center gap-6">
-        <span className="material-icons text-black">shopping_cart</span>
+        <span
+          className="material-icons text-black cursor-pointer"
+          onClick={() => navigate('/cart')}
+        >
+          shopping_cart
+        </span>
         <span
           className="material-icons text-black cursor-pointer"
           onClick={() => navigate('/login')}
