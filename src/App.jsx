@@ -6,6 +6,7 @@ import Tickets from './components/Tickets';
 import TicketDetail from './components/TicketDetail';
 import Cart from './components/Cart';
 import MyOrder from './components/MyOrder';
+import ReviewForm from './components/ReviewForm';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/tickets" element={<Tickets />} />
         <Route path="/tickets/:id" element={<TicketDetail />} />
+        <Route path="/tickets/:id/review-form" element={<ReviewForm />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/myorder" element={<MyOrder />} />
       </Routes>

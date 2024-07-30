@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import KeywordRectangle from './KeywordRectangle';
+import BlackButton from './BlackButton';
+import Tooltip from './Tooltip';
 import StarIcon from './icons/StarIcon';
 import HalfStarIcon from './icons/HalfStarIcon';
 import InfoIcon from './icons/InfoIcon';
-import KeywordRectangle from './KeywordRectangle';
-import BlackButton from './BlackButton';
 
 const TicketInfo = ({ id }) => {
   const [quantity, setQuantity] = useState(1);
@@ -60,7 +61,9 @@ const TicketInfo = ({ id }) => {
                 <div className="text-wrapper-ticket-keyword text-sm italic text-black text-left mr-2">
                   Keyword
                 </div>
-                <InfoIcon className="text-black" />
+                <Tooltip text="사용자 리뷰에서 AI를 통해 추출된 주요 키워드입니다">
+                  <InfoIcon className="text-black cursor-pointer" />
+                </Tooltip>
               </div>
               <div className="keyword-rectangle-container flex gap-2">
                 <KeywordRectangle content="풍경" />
