@@ -12,9 +12,9 @@ const Reviews = ({ id }) => {
 
   return (
     <div className="flex justify-center">
-      <div className="reviews-container w-[1200px] mt-[30px]">
+      <div className="reviews-container w-[1200px] mt-[36px]">
         {/* Header and Button Section */}
-        <div className="flex items-center justify-between mb-[60px]">
+        <div className="flex items-center justify-between mb-[60px] ml-[18px] mr-[18px]">
           <div className="flex items-center">
             <h2 className="text-2xl font-bold text-black mr-2">All Reviews</h2>
             <span className="text-gray-500 text-sm italic">(51)</span>
