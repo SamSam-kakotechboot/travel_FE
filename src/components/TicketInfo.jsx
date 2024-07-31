@@ -5,8 +5,9 @@ import Tooltip from './Tooltip';
 import StarIcon from './icons/StarIcon';
 import HalfStarIcon from './icons/HalfStarIcon';
 import InfoIcon from './icons/InfoIcon';
+import disneylandImage from '../assets/disneyland.png'; // 이미지 파일 import
 
-const TicketInfo = ({ id }) => {
+const TicketInfo = ({ ticket }) => {
   const [quantity, setQuantity] = useState(1);
 
   const increaseQuantity = () => {
@@ -17,6 +18,8 @@ const TicketInfo = ({ id }) => {
     setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   };
 
+  console.log(ticket);
+
   return (
     <div className="ticket-info-container flex flex-col items-center pt-[78px]">
       {/* Image and Info Section Container */}
@@ -25,7 +28,7 @@ const TicketInfo = ({ id }) => {
         <div className="image-container w-[430px] h-[450px] rounded-lg object-cover">
           <img
             className="ticket-image w-[430px] h-[450px] rounded-lg object-cover"
-            src="https://via.placeholder.com/280x335"
+            src={disneylandImage}
             alt="DisneyLand Paris"
           />
         </div>
@@ -34,7 +37,7 @@ const TicketInfo = ({ id }) => {
         <div className="info-section flex flex-col justify-start min-w-[430px]">
           <div className="ticket-details w-[450px] h-[380px] flex flex-col relative">
             <div className="text-wrapper-ticket-name text-4xl font-bold text-black text-left">
-              DisneyLand Paris
+              {ticket.title}
             </div>
             {/* Star Rating Section */}
             <div className="star-wrapper flex items-center mt-2 mb-[5px] h-[30px]">
@@ -48,13 +51,13 @@ const TicketInfo = ({ id }) => {
               <span className="ml-2 text-black text-sm italic">4.5/5.5</span>
             </div>
             <div className="text-wrapper-ticket-price text-2xl font-bold text-black mb-[10px] text-left">
-              120,000
+              {ticket.price.toLocaleString()}
             </div>
             <div className="text-wrapper-ticket-info text-base text-black mt-1 text-left">
-              장소: DisneyLand Paris
+              장소: {ticket.place}
             </div>
             <div className="text-wrapper-ticket-info text-base text-black mt-1 text-left">
-              유효기간: 2024/07/24 ~ 2025/03/02
+              유효기간: {ticket.startDate} ~ {ticket.endDate}
             </div>
             <div className="keyword-wrapper flex flex-col mt-[8px] min-h-[50px] w-full bg-aquamarine-300">
               <div className="flex items-center mb-2">
@@ -73,7 +76,7 @@ const TicketInfo = ({ id }) => {
               </div>
             </div>
             <div className="text-wrapper-ticket-content text-base text-black/60 mt-3 mb-10">
-              디즈니랜드 파리에서 환상의 경험을 하세요!
+              {ticket.contents}
               <br />
               어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고
               저쩌고 어쩌고 저쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고

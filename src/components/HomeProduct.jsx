@@ -1,11 +1,12 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import StarIcon from './icons/StarIcon';
 import HalfStarIcon from './icons/HalfStarIcon';
-
-export default function HomeProduct({ id }) {
+import disneylandImage from '../assets/disneyland.png'; // 이미지 파일 import
+export default function HomeProduct({ ticket }) {
   const navigate = useNavigate();
   const handleProductClick = () => {
-    navigate(`/tickets/${id}`);
+    navigate(`/tickets/${ticket.ticketId}`);
   };
 
   return (
@@ -16,16 +17,16 @@ export default function HomeProduct({ id }) {
       <div className="w-full h-[298px]">
         <img
           className="w-full h-full object-cover rounded-xl"
-          src="https://via.placeholder.com/280x335"
-          alt="DisneyLand Paris"
+          src={disneylandImage}
+          alt="disneyland"
         />
       </div>
       <div className="text-black text-lg font-poppins font-bold mt-4">
-        DisneyLand Paris
+        {ticket.title}
       </div>
       <div className="flex items-center gap-[2px] mt-2">
         {[...Array(4)].map((_, i) => (
-          <StarIcon key={i}></StarIcon>
+          <StarIcon key={i} />
         ))}
         <HalfStarIcon />
         <span className="text-black text-sm font-poppins font-normal ml-2">
@@ -33,7 +34,7 @@ export default function HomeProduct({ id }) {
         </span>
       </div>
       <div className="text-black text-2xl font-poppins font-semibold mt-2">
-        120,000
+        {ticket.price.toLocaleString()} 원
       </div>
     </div>
   );

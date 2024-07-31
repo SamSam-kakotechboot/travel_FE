@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+// src/PageButtons.js
+import React from 'react';
 
-export default function PageButtons({ totalPages = 10 }) {
-  const [currentPage, setCurrentPage] = useState(1);
-
+export default function PageButtons({ totalPages, currentPage, onPageChange }) {
   const handlePageChange = page => {
-    setCurrentPage(page);
+    onPageChange(page);
   };
 
   return (
