@@ -1,12 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import Header from './Header';
 import HomeProduct from './HomeProduct';
 
 export default function Home() {
   const navigate = useNavigate();
   return (
     <div className="relative bg-white min-h-">
-      <Header />
       <div className="max-w-screen-xl mx-auto px-4 py-8">
         <div className="text-center text-black text-7xl font-poppins font-bold mb-40 mt-40">
           NEW ARRIVALS

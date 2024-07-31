@@ -52,7 +52,6 @@ const ReviewForm = ({ id }) => {
 
   return (
     <div>
-      <Header />
       <TicketInfo />
       <div className="flex justify-center">
         <div className="form-container w-[1200px] mt-[18px] mb-[50px]">

@@ -7,7 +7,6 @@ export default function TicketDetail() {
   const { id } = useParams();
   return (
     <div>
-      <Header />
       <div className="relative bg-white min-h-">
         <TicketInfo id={id} />
         <Reviews id={id} />

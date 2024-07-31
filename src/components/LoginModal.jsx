@@ -5,7 +5,8 @@ export default function LoginModal() {
         <h2 className="text-2xl font-light font-poppins mb-6">
           Welcome to SamSam!
         </h2>
-        <h3 className="text-3xl font-bold font-noto mb-4">로그인</h3>
+        <h3 className="text-3xl font-bold font-noto mb-4 mt-2">로그인</h3>
+        <div className="min-h-[50px]"></div>
         <form>
           <div className="mb-4">
             <label
@@ -18,7 +19,7 @@ export default function LoginModal() {
               id="id"
               name="id"
               type="text"
-              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm min-h-[40px]"
               placeholder="아이디를 입력해주세요"
             />
           </div>
@@ -34,7 +35,7 @@ export default function LoginModal() {
                 id="password"
                 name="password"
                 type="password"
-                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm min-h-[40px]"
                 placeholder="비밀번호를 입력해주세요"
               />
               <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
@@ -64,7 +65,7 @@ export default function LoginModal() {
               />
               <label
                 htmlFor="remember_me"
-                className="ml-2 block text-sm text-gray-900 font-noto"
+                className="ml-2 block text-sm text-gray-900 font-noto mr-4"
               >
                 이 기기에서 정보를 기억할게요
               </label>
