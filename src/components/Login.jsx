@@ -9,7 +9,7 @@ export default function Login() {
         <div className="flex justify-center items-center min-w-[500px]">
           <LoginModal />
         </div>
-        <div className="flex justify-center items-center min-w-[800px]">
+        <div className="flex justify-center items-center min-w-[900px]">
           <img
             src={People}
             alt="discuss-idea"
