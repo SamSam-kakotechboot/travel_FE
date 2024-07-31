@@ -1,15 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import BlackButton from './BlackButton';
 import Review from './Review';
 import PageButtons from './PageButtons';
 
-const Reviews = ({ id }) => {
-  const navigate = useNavigate();
-  const handleReviewButtonClick = () => {
-    navigate(`/tickets/${id}/review-form`);
-  };
-
+const Reviews = ({ id, onReviewButtonClick }) => {
   return (
     <div className="flex justify-center">
       <div className="reviews-container w-[1200px] mt-[36px]">
@@ -23,7 +17,7 @@ const Reviews = ({ id }) => {
             width="166px"
             height="48px"
             text="리뷰 작성"
-            onClick={handleReviewButtonClick}
+            onClick={onReviewButtonClick}
           />
         </div>
 

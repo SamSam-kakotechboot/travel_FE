@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from './Header';
-import TicketInfo from './TicketInfo';
 import BlackButton from './BlackButton';
 import UploadButton from './UploadButton';
 import GrayStarIcon from './icons/GrayStarIcon';
@@ -52,7 +50,6 @@ const ReviewForm = ({ id }) => {
 
   return (
     <div>
-      <TicketInfo />
       <div className="flex justify-center">
         <div className="form-container w-[1200px] mt-[18px] mb-[50px]">
           {/* Header and Button Section */}

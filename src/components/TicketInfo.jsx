@@ -18,8 +18,6 @@ const TicketInfo = ({ ticket }) => {
     setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   };
 
-  console.log(ticket);
-
   return (
     <div className="ticket-info-container flex flex-col items-center pt-[78px]">
       {/* Image and Info Section Container */}
