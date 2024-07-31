@@ -6,7 +6,6 @@ import CartDetail from './CartDetail';
 export default function MyOrder() {
   return (
     <div className="relative bg-white">
-      <Header />
       <div className="flex flex-col min-h-screen bg-white py-12 px-20">
         <div className="flex items-center mb-8 mt-2">
           <CartIcon className="w-12 h-12 mr-3" />
