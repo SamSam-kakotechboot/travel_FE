@@ -1,7 +1,7 @@
-import Header from './Header';
-import CartTotal from './CartTotal';
-import CartIcon from './icons/CartIcon';
-import CartDetail from './CartDetail';
+import Header from '../components/Header';
+import CartTotal from '../components/CartTotal';
+import CartIcon from '../components/icons/CartIcon';
+import CartDetail from '../components/CartDetail';
 
 export default function MyOrder() {
   return (

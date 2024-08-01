@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getTotalPages, getCurrentItems } from '../utils/pagination';
-import HomeProduct from './HomeProduct';
-import PageButtons from './PageButtons';
+import HomeProduct from '../components/HomeProduct';
+import PageButtons from '../components/PageButtons';
 import ticketsData from '../testdata/ticket.json';
 
 export default function Tickets() {
