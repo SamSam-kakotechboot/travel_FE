@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getTotalPages, getCurrentItems } from '../utils/pagination';
 import BlackButton from './BlackButton';
 import Review from './Review';
 import PageButtons from './PageButtons';
@@ -8,11 +9,11 @@ const Reviews = ({ id, onReviewButtonClick }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const reviewsPerPage = 5;
 
-  const totalPages = Math.ceil(reviewsData.length / reviewsPerPage);
-
-  const currentReviews = reviewsData.slice(
-    (currentPage - 1) * reviewsPerPage,
-    currentPage * reviewsPerPage
+  const totalPages = getTotalPages(reviewsData, reviewsPerPage);
+  const currentReviews = getCurrentItems(
+    reviewsData,
+    currentPage,
+    reviewsPerPage
   );
 
   useEffect(() => {

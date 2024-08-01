@@ -1,20 +1,18 @@
-// src/Tickets.js
 import React, { useState, useEffect } from 'react';
+import { getTotalPages, getCurrentItems } from '../utils/pagination';
 import HomeProduct from './HomeProduct';
 import PageButtons from './PageButtons';
-import ticketsData from '../testdata/ticket.json'; // JSON 파일 가져오기
+import ticketsData from '../testdata/ticket.json';
 
 export default function Tickets() {
   const [currentPage, setCurrentPage] = useState(1);
   const ticketsPerPage = 12;
 
-  const totalPages = Math.ceil(
-    Object.keys(ticketsData).length / ticketsPerPage
-  );
-
-  const currentTickets = Object.values(ticketsData).slice(
-    (currentPage - 1) * ticketsPerPage,
-    currentPage * ticketsPerPage
+  const totalPages = getTotalPages(ticketsData, ticketsPerPage);
+  const currentTickets = getCurrentItems(
+    ticketsData,
+    currentPage,
+    ticketsPerPage
   );
 
   useEffect(() => {
