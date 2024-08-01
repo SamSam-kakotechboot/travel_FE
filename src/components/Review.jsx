@@ -17,8 +17,6 @@ const Review = ({ reviewer, score, content, date, imgUrl }) => {
             <div key={index} className="star">
               {index < fullStars ? (
                 <StarIcon className="w-6 h-6 ml-[3px]" />
-              ) : index === fullStars && hasHalfStar ? (
-                <HalfStarIcon className="w-6 h-6" />
               ) : null}
             </div>
           ))}
