@@ -1,10 +1,9 @@
 import React from 'react';
 import StarIcon from './icons/StarIcon';
-import HalfStarIcon from './icons/HalfStarIcon';
+import disneylandReviewImage from '../assets/disneyland_review.png';
 
 const Review = ({ reviewer, score, content, date, imgUrl }) => {
   const fullStars = Math.floor(score);
-  const hasHalfStar = score - fullStars >= 0.5;
 
   return (
     <div className="review-container flex w-[790px] h-[227px] p-6 rounded-[20px] border border-gray-100 bg-white">
@@ -16,8 +15,6 @@ const Review = ({ reviewer, score, content, date, imgUrl }) => {
             <div key={index} className="star">
               {index < fullStars ? (
                 <StarIcon className="w-6 h-6 ml-[3px]" />
-              ) : index === fullStars && hasHalfStar ? (
-                <HalfStarIcon className="w-6 h-6" />
               ) : null}
             </div>
           ))}
@@ -39,12 +36,13 @@ const Review = ({ reviewer, score, content, date, imgUrl }) => {
         </div>
       </div>
       {/* Right Image Container */}
-      <div
-        className="image-container w-[265px] h-[170px] rounded-2xl bg-light-gray"
-        style={{
-          background: `url(${imgUrl}) lightgray 50% / cover no-repeat`,
-        }}
-      ></div>
+      <div className="image-container flex-shrink-0 ml-4">
+        <img
+          className="w-[265px] h-[170px] rounded-2xl object-cover"
+          src={disneylandReviewImage}
+          alt="Disneyland Review"
+        />
+      </div>
     </div>
   );
 };

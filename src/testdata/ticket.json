@@ -1,5 +1,5 @@
-{
-  "1": {
+[
+  {
     "ticketId": "1",
     "userId": "user123",
     "title": "disneyLandParis1",
@@ -13,7 +13,7 @@
     "deleteYn": "N",
     "veiwYn": "Y"
   },
-  "2": {
+  {
     "ticketId": "2",
     "userId": "user123",
     "title": "disneyLandParis2",
@@ -27,7 +27,7 @@
     "deleteYn": "N",
     "veiwYn": "Y"
   },
-  "3": {
+  {
     "ticketId": "3",
     "userId": "user123",
     "title": "disneyLandParis3",
@@ -41,7 +41,7 @@
     "deleteYn": "N",
     "veiwYn": "Y"
   },
-  "4": {
+  {
     "ticketId": "4",
     "userId": "user123",
     "title": "disneyLandParis4",
@@ -55,7 +55,7 @@
     "deleteYn": "N",
     "veiwYn": "Y"
   },
-  "5": {
+  {
     "ticketId": "5",
     "userId": "user123",
     "title": "disneyLandParis5",
@@ -69,7 +69,7 @@
     "deleteYn": "N",
     "veiwYn": "Y"
   },
-  "6": {
+  {
     "ticketId": "6",
     "userId": "user123",
     "title": "disneyLandParis6",
@@ -83,7 +83,7 @@
     "deleteYn": "N",
     "veiwYn": "Y"
   },
-  "7": {
+  {
     "ticketId": "7",
     "userId": "user123",
     "title": "disneyLandParis7",
@@ -97,7 +97,7 @@
     "deleteYn": "N",
     "veiwYn": "Y"
   },
-  "8": {
+  {
     "ticketId": "8",
     "userId": "user123",
     "title": "disneyLandParis8",
@@ -111,7 +111,7 @@
     "deleteYn": "N",
     "veiwYn": "Y"
   },
-  "9": {
+  {
     "ticketId": "9",
     "userId": "user123",
     "title": "disneyLandParis9",
@@ -125,7 +125,7 @@
     "deleteYn": "N",
     "veiwYn": "Y"
   },
-  "10": {
+  {
     "ticketId": "10",
     "userId": "user123",
     "title": "disneyLandParis10",
@@ -139,7 +139,7 @@
     "deleteYn": "N",
     "veiwYn": "Y"
   },
-  "11": {
+  {
     "ticketId": "11",
     "userId": "user123",
     "title": "disneyLandParis11",
@@ -153,7 +153,7 @@
     "deleteYn": "N",
     "veiwYn": "Y"
   },
-  "12": {
+  {
     "ticketId": "12",
     "userId": "user123",
     "title": "disneyLandParis12",
@@ -167,7 +167,7 @@
     "deleteYn": "N",
     "veiwYn": "Y"
   },
-  "13": {
+  {
     "ticketId": "13",
     "userId": "user123",
     "title": "disneyLandParis13",
@@ -181,4 +181,4 @@
     "deleteYn": "N",
     "veiwYn": "Y"
   }
-}
+]
