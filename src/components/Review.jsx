@@ -1,11 +1,9 @@
 import React from 'react';
 import StarIcon from './icons/StarIcon';
-import HalfStarIcon from './icons/HalfStarIcon';
 import disneylandReviewImage from '../assets/disneyland_review.png';
 
 const Review = ({ reviewer, score, content, date, imgUrl }) => {
   const fullStars = Math.floor(score);
-  const hasHalfStar = score - fullStars >= 0.5;
 
   return (
     <div className="review-container flex w-[790px] h-[227px] p-6 rounded-[20px] border border-gray-100 bg-white">
