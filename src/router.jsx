@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
-import Home from './components/Home';
-import Login from './components/Login';
-import Tickets from './components/Tickets';
-import TicketDetail from './components/TicketDetail';
-import Cart from './components/Cart';
-import MyOrder from './components/MyOrder';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Tickets from './pages/Tickets';
+import TicketDetail from './pages/TicketDetail';
+import Cart from './pages/Cart';
+import MyOrder from './pages/MyOrder';
 
 export const router = createBrowserRouter([
   {

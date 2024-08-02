@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import TicketInfo from './TicketInfo';
-import Reviews from './Reviews';
+import TicketInfo from '../components/TicketInfo';
+import Reviews from '../components/Reviews';
 import ticketsData from '../testdata/ticket.json'; // JSON 파일 가져오기
-import ReviewForm from './ReviewForm';
+import ReviewForm from '../components/ReviewForm';
 
 export default function TicketDetail() {
   const { id } = useParams();
@@ -12,7 +12,7 @@ export default function TicketDetail() {
 
   useEffect(() => {
     // id에 해당하는 티켓 데이터를 찾습니다.
-    const ticketInfo = ticketsData[id];
+    const ticketInfo = ticketsData.find(ticket => ticket.ticketId === id);
     setTicket(ticketInfo);
   }, [id]);
 

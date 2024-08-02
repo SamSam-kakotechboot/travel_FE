@@ -1,6 +1,6 @@
-import CartTotal from './CartTotal';
-import CartIcon from './icons/CartIcon';
-import CartDetail from './CartDetail';
+import CartTotal from '../components/CartTotal';
+import CartIcon from '../components/icons/CartIcon';
+import CartDetail from '../components/CartDetail';
 import { useNavigate } from 'react-router-dom';
 
 export default function Cart() {

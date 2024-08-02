@@ -1,4 +1,4 @@
-import LoginModal from './LoginModal';
+import LoginModal from '../components/LoginModal';
 import People from '../assets/discuss-idea.png';
 
 export default function Login() {

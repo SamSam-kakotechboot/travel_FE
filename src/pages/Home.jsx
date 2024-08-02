@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import HomeProduct from './HomeProduct';
+import HomeProduct from '../components/HomeProduct';
 import ticketsData from '../testdata/ticket.json'; // JSON 파일 가져오기
 
 export default function Home() {
