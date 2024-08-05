@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import LoginButton from './LoginButton';
-import LoginId from './LoginId';
-import LoginPassword from './LoginPassword';
+import LoginInput from './LoginInput';
 import LoginRemember from './LoginRemember';
-import LoginPhone from './LoginPhone';
-import LoginName from './LoginName';
+import LoginHook from '../hooks/loginHook';
 
 export default function LoginModal() {
-  const [isSignUpMode, setIsSignUpMode] = useState(false);
-
-  const toggleMode = () => {
-    setIsSignUpMode(!isSignUpMode);
-  };
+  const { isSignUpMode, formData, setRef, toggleMode, handleSubmit } =
+    LoginHook();
 
   return (
     <div className="flex justify-between items-center max-w-md w-full p-4 bg-white shadow-md rounded-lg border">
@@ -23,12 +18,32 @@ export default function LoginModal() {
           {isSignUpMode ? '회원가입' : '로그인'}
         </h3>
         <div className="min-h-[50px]"></div>
-        <form>
-          <LoginId />
-          {isSignUpMode && <LoginName />}
-          {isSignUpMode && <LoginPhone />}
-          <LoginPassword />
-          {!isSignUpMode && <LoginRemember />}
+        <form onSubmit={handleSubmit}>
+          <LoginInput
+            inputRef={setRef('id')}
+            type="id"
+            placeholder="아이디를 입력해주세요"
+          />
+          {isSignUpMode && (
+            <LoginInput
+              inputRef={setRef('name')}
+              type="name"
+              placeholder="이름을 입력해주세요"
+            />
+          )}
+          {isSignUpMode && (
+            <LoginInput
+              inputRef={setRef('phone')}
+              type="phone"
+              placeholder="전화번호를 입력해주세요"
+            />
+          )}
+          <LoginInput
+            inputRef={setRef('password')}
+            type="password"
+            placeholder="비밀번호를 입력해주세요"
+          />
+          {!isSignUpMode && <LoginRemember inputRef={setRef('remember')} />}
           <LoginButton isSignUpMode={isSignUpMode} toggleMode={toggleMode} />
         </form>
       </div>
