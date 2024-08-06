@@ -3,10 +3,21 @@ import LoginButton from './LoginButton';
 import LoginInput from './LoginInput';
 import LoginRemember from './LoginRemember';
 import LoginHook from '../hooks/loginHook';
+import { apiRequest } from '../hooks/loginApi';
 
 export default function LoginModal() {
-  const { isSignUpMode, formData, setRef, toggleMode, handleSubmit } =
+  const { isSignUpMode, formData, setRef, toggleMode, updateFormData } =
     LoginHook();
+
+  const onSubmit = e => {
+    e.preventDefault();
+    updateFormData(updatedData => {
+      console.log(updatedData);
+      // apiRequest(isSignUpMode, updatedData).then(() => {
+      // });
+      console.log('api 전송!!');
+    });
+  };
 
   return (
     <div className="flex justify-between items-center max-w-md w-full p-4 bg-white shadow-md rounded-lg border">
@@ -18,25 +29,25 @@ export default function LoginModal() {
           {isSignUpMode ? '회원가입' : '로그인'}
         </h3>
         <div className="min-h-[50px]"></div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           <LoginInput
             inputRef={setRef('id')}
             type="id"
             placeholder="아이디를 입력해주세요"
           />
           {isSignUpMode && (
-            <LoginInput
-              inputRef={setRef('name')}
-              type="name"
-              placeholder="이름을 입력해주세요"
-            />
-          )}
-          {isSignUpMode && (
-            <LoginInput
-              inputRef={setRef('phone')}
-              type="phone"
-              placeholder="전화번호를 입력해주세요"
-            />
+            <>
+              <LoginInput
+                inputRef={setRef('name')}
+                type="name"
+                placeholder="이름을 입력해주세요"
+              />
+              <LoginInput
+                inputRef={setRef('phone')}
+                type="phone"
+                placeholder="전화번호를 입력해주세요"
+              />
+            </>
           )}
           <LoginInput
             inputRef={setRef('password')}
