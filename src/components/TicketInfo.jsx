@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
 import KeywordRectangle from './KeywordRectangle';
 import BlackButton from './BlackButton';
@@ -12,6 +12,7 @@ import disneylandImage from '../assets/disneyland.png';
 const TicketInfo = ({ ticket }) => {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+  const user = useSelector(state => state.auth.user);
 
   const increaseQuantity = () => {
     setQuantity(prevQuantity => prevQuantity + 1);
@@ -22,6 +23,11 @@ const TicketInfo = ({ ticket }) => {
   };
 
   const handleAddToCart = () => {
+    if (!user) {
+      alert('로그인한 후, 장바구니에 담을 수 있습니다.');
+      return;
+    }
+
     dispatch(addToCart({ ...ticket, quantity }));
     alert('장바구니에 담겼습니다.');
   };

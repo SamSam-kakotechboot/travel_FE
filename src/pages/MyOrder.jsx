@@ -13,6 +13,7 @@ export default function MyOrder() {
   const handleLogout = () => {
     dispatch(clearCredentials());
     eraseCookie('token');
+    localStorage.removeItem('token');
     navigate('/');
   };
 
