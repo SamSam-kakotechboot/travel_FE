@@ -17,8 +17,7 @@ const cartSlice = createSlice({
       if (existingItem) {
         existingItem.quantity += item.quantity;
       } else {
-        // 새로운 상품의 초기 수량을 1로 설정
-        state.cartItems.push({ ...item, quantity: 1 });
+        state.cartItems.push(item);
       }
     },
     removeFromCart: (state, action) => {

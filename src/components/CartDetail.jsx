@@ -24,7 +24,7 @@ export default function CartDetail() {
   };
 
   return (
-    <div className="flex-1 bg-white py-3 px-5 rounded-lg border border-gray-100">
+    <div className="flex-1 bg-white py-3 px-5 rounded-2xl border border-gray-100">
       <div className="space-y-4">
         {cartItems.map((item, index, array) => (
           <CartItem
@@ -61,7 +61,7 @@ function CartItem({
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="h-[154px] flex flex-col justify-between items-start">
+      <div className="h-[154px] flex flex-col justify-between items-start w-[120px]">
         <div className="flex flex-col justify-start items-start gap-[2px]">
           <div className="text-black text-[20px] font-poppins font-bold break-words">
             {item.title}
