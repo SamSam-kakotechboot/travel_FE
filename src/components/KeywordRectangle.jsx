@@ -1,23 +1,35 @@
 import React from 'react';
 
-const KeywordRectangle = ({ content }) => {
-  const minWidth = 50;
-  const paddingX = 5;
+const KeywordRectangle = ({
+  content,
+  color,
+  textcolor,
+  width,
+  padX,
+  height,
+}) => {
+  const defaultColor = color ? color : `bg-[#CEE6FA]`;
+  const defaultTextColor = textcolor ? textcolor : 'text-black';
+  const minWidth = width ? width : 50;
+  const paddingX = padX ? padX : 5;
   const paddingBottom = 2;
   const textWidth = content.length * 12;
   const dynamicWidth = Math.max(textWidth + paddingX * 2, minWidth);
+  const defaultheight = height ? height : '24px';
 
   return (
     <div
-      className="keyword-rectangle flex items-center justify-center rounded-full bg-[#CEE6FA]"
+      className={`keyword-rectangle flex items-center justify-center rounded-full ${defaultColor}`}
       style={{
         width: `${dynamicWidth}px`,
-        height: '24px',
+        height: defaultheight,
         padding: `0 ${paddingX}px ${paddingBottom}px`,
         whiteSpace: 'nowrap', // 텍스트가 줄 바꿈 없이 한 줄로 유지되도록 설정
       }}
     >
-      <span className="text-xs text-black font-medium">{content}</span>
+      <span className={`text-xs ${defaultTextColor} font-medium`}>
+        {content}
+      </span>
     </div>
   );
 };
