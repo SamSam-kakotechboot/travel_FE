@@ -1,23 +1,32 @@
-// features/auth/authActions.js
-import { loginSuccess } from '../store/authSlice';
+import store from '../store/store';
+import { redirect } from 'react-router-dom';
 
-export const login = (username, password) => async dispatch => {
-  try {
-    const response = await fetch('/src/testdata/login.json');
-    const users = await response.json();
-
-    const user = users.find(
-      u => u.username === username && u.password === password
-    );
-
-    if (user) {
-      const mockToken = 'mockToken123456'; // 목업 토큰 생성
-      dispatch(loginSuccess({ token: mockToken, user }));
-    } else {
-      alert('Invalid credentials');
-    }
-  } catch (error) {
-    console.error('Failed to fetch login data', error);
-    alert('Failed to authenticate');
+export function getAuthToken() {
+  const state = store.getState();
+  const token = state.auth.token;
+  if (!token) {
+    return null;
   }
-};
+  return token;
+}
+
+export function tokenLoader() {
+  const token = getAuthToken();
+  return token;
+}
+
+export function cartAuthLoader() {
+  const token = getAuthToken();
+  if (!token) {
+    return redirect('/login');
+  }
+  return null;
+}
+
+export function loginAuthLoader() {
+  const token = getAuthToken();
+  if (token) {
+    return redirect('/myorder');
+  }
+  return null;
+}

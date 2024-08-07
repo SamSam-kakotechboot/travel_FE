@@ -1,16 +1,8 @@
 [
   {
-    "id": 1,
-    "username": "user1",
-    "password": "password1",
-    "name": "User One",
-    "phone": "1234567890"
-  },
-  {
-    "id": 2,
-    "username": "user2",
-    "password": "password2",
-    "name": "User Two",
-    "phone": "0987654321"
+    "id": "user1",
+    "password": "1234",
+    "name": "홍길동",
+    "phone": "010-1234-5678"
   }
 ]

@@ -1,21 +1,30 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import LoginButton from './LoginButton';
 import LoginInput from './LoginInput';
 import LoginRemember from './LoginRemember';
 import LoginHook from '../hooks/loginHook';
 import { apiRequest } from '../hooks/loginApi';
+import { setCredentials } from '../store/authSlice';
 
 export default function LoginModal() {
   const { isSignUpMode, formData, setRef, toggleMode, updateFormData } =
     LoginHook();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = e => {
     e.preventDefault();
     updateFormData(updatedData => {
-      console.log(updatedData);
-      // apiRequest(isSignUpMode, updatedData).then(() => {
-      // });
-      console.log('api 전송!!');
+      apiRequest(isSignUpMode, updatedData)
+        .then(response => {
+          dispatch(setCredentials(response));
+          navigate('/'); // 로그인 성공 시 홈으로 이동
+        })
+        .catch(error => {
+          console.log('아이디 또는 비밀번호가 일치하지 않습니다.');
+        });
     });
   };
 

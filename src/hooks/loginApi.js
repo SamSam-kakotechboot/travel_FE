@@ -1,45 +1,28 @@
-// src/api.js
+export const apiRequest = (isSignUpMode, formData) => {
+  return new Promise((resolve, reject) => {
+    const mockData = [
+      {
+        id: 'user1',
+        password: '1234',
+        name: '홍길동',
+        phone: '010-1234-5678',
+      },
+    ];
 
-export const apiRequest = async (isSignUpMode, formData) => {
-  const url = isSignUpMode ? '/api/auth/signUp' : '/api/auth/login';
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
-  };
-  const body = isSignUpMode
-    ? JSON.stringify({
-        id: formData.id,
-        password: formData.password,
-        name: formData.name,
-        phone: formData.phone,
-      })
-    : JSON.stringify({
-        id: formData.id,
-        password: formData.password,
+    const user = mockData.find(
+      user => user.id === formData.id && user.password === formData.password
+    );
+
+    if (user) {
+      resolve({
+        token:
+          'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwicm9sZSI6Ik5PUk1BTCIsIm5hbWUiOiLtmY3quLjrj5kiLCJpZCI6IjMiLCJleHAiOjIzMjEzNTU4OTR9.1v3fnVPcs-xn2nKUDYrCOxcBM86OWNGO7m-tPWm_bqg',
+        role: 'NORMAL',
+        message: `${formData.id} 로그인 되었습니다.`,
+        user: user,
       });
-
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: headers,
-      body: body,
-    });
-    const result = await response.json();
-    if (response.ok) {
-      if (isSignUpMode) {
-        alert(`${formData.id} 회원가입에 성공했습니다.`);
-      } else {
-        alert(`${formData.id} 로그인 되었습니다.`);
-        // 여기서 토큰과 역할을 저장할 수 있습니다.
-        // localStorage.setItem('token', result.token);
-        // localStorage.setItem('role', result.role);
-      }
     } else {
-      alert(result.message);
+      reject('아이디 또는 비밀번호가 일치하지 않습니다.');
     }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('오류가 발생했습니다. 다시 시도해 주세요.');
-  }
+  });
 };
