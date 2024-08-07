@@ -18,7 +18,7 @@ const authSlice = createSlice({
       state.role = role;
       state.isAuthenticated = true;
       state.user = user;
-      setCookie('token', token, 7, { secure: true, sameSite: 'Strict' });
+      setCookie('token', token, 1, { secure: true, sameSite: 'Strict' });
     },
     clearCredentials: state => {
       state.token = null;
