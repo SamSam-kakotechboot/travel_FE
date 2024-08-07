@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../store/cartSlice';
 import KeywordRectangle from './KeywordRectangle';
 import BlackButton from './BlackButton';
 import Tooltip from './Tooltip';
 import StarIcon from './icons/StarIcon';
 import HalfStarIcon from './icons/HalfStarIcon';
 import InfoIcon from './icons/InfoIcon';
-import disneylandImage from '../assets/disneyland.png'; // 이미지 파일 import
+import disneylandImage from '../assets/disneyland.png';
 
 const TicketInfo = ({ ticket }) => {
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.auth.user);
 
   const increaseQuantity = () => {
     setQuantity(prevQuantity => prevQuantity + 1);
@@ -16,6 +20,33 @@ const TicketInfo = ({ ticket }) => {
 
   const decreaseQuantity = () => {
     setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
+
+  const handleAddToCart = () => {
+    if (!user) {
+      alert('로그인한 후, 장바구니에 담을 수 있습니다.');
+      return;
+    }
+
+    dispatch(addToCart({ ...ticket, quantity }));
+    alert('장바구니에 담겼습니다.');
+  };
+
+  const renderStars = rating => {
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 >= 0.5;
+
+    return (
+      <div className="star-wrapper flex items-center">
+        {[...Array(fullStars)].map((_, index) => (
+          <StarIcon
+            key={`full-${index}`}
+            className={index !== fullStars - 1 ? 'mr-[2.5px]' : ''} // 마지막 별에는 마진 없음
+          />
+        ))}
+        {halfStar && <HalfStarIcon key="half-star" />}
+      </div>
+    );
   };
 
   return (
@@ -39,14 +70,10 @@ const TicketInfo = ({ ticket }) => {
             </div>
             {/* Star Rating Section */}
             <div className="star-wrapper flex items-center mt-2 mb-[5px] h-[30px]">
-              <div className="star-wrapper flex items-center">
-                <StarIcon className="mr-[3px]" />
-                <StarIcon className="mr-[3px]" />
-                <StarIcon className="mr-[3px]" />
-                <StarIcon className="mr-[3px]" />
-                <HalfStarIcon />
-              </div>
-              <span className="ml-2 text-black text-sm italic">4.5/5.5</span>
+              {renderStars(ticket.rating)}
+              <span className="ml-2 text-black text-sm italic">
+                {ticket.rating.toFixed(1)}/5.0
+              </span>
             </div>
             <div className="text-wrapper-ticket-price text-2xl font-bold text-black mb-[10px] text-left">
               {ticket.price.toLocaleString()}
@@ -75,11 +102,6 @@ const TicketInfo = ({ ticket }) => {
             </div>
             <div className="text-wrapper-ticket-content text-base text-black/60 mt-3 mb-10">
               {ticket.contents}
-              <br />
-              어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고
-              저쩌고 어쩌고 저쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고
-              저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고
-              어쩌고 저쩌고 어쩌고 저쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 ...
             </div>
           </div>
           <div className="gray-line w-full h-[1px] bg-gray-100 mt-5"></div>
@@ -109,7 +131,7 @@ const TicketInfo = ({ ticket }) => {
               width="300px"
               height="56px"
               text="장바구니 담기"
-              onClick={() => alert('장바구니에 담겼습니다.')}
+              onClick={handleAddToCart}
             />
           </div>
         </div>
