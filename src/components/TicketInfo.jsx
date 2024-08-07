@@ -26,6 +26,23 @@ const TicketInfo = ({ ticket }) => {
     alert('장바구니에 담겼습니다.');
   };
 
+  const renderStars = rating => {
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 >= 0.5;
+
+    return (
+      <div className="star-wrapper flex items-center">
+        {[...Array(fullStars)].map((_, index) => (
+          <StarIcon
+            key={`full-${index}`}
+            className={index !== fullStars - 1 ? 'mr-[2.5px]' : ''} // 마지막 별에는 마진 없음
+          />
+        ))}
+        {halfStar && <HalfStarIcon key="half-star" />}
+      </div>
+    );
+  };
+
   return (
     <div className="ticket-info-container flex flex-col items-center pt-[78px]">
       {/* Image and Info Section Container */}
@@ -47,14 +64,10 @@ const TicketInfo = ({ ticket }) => {
             </div>
             {/* Star Rating Section */}
             <div className="star-wrapper flex items-center mt-2 mb-[5px] h-[30px]">
-              <div className="star-wrapper flex items-center">
-                <StarIcon className="mr-[3px]" />
-                <StarIcon className="mr-[3px]" />
-                <StarIcon className="mr-[3px]" />
-                <StarIcon className="mr-[3px]" />
-                <HalfStarIcon />
-              </div>
-              <span className="ml-2 text-black text-sm italic">4.5/5.5</span>
+              {renderStars(ticket.rating)}
+              <span className="ml-2 text-black text-sm italic">
+                {ticket.rating.toFixed(1)}/5.0
+              </span>
             </div>
             <div className="text-wrapper-ticket-price text-2xl font-bold text-black mb-[10px] text-left">
               {ticket.price.toLocaleString()}
@@ -83,11 +96,6 @@ const TicketInfo = ({ ticket }) => {
             </div>
             <div className="text-wrapper-ticket-content text-base text-black/60 mt-3 mb-10">
               {ticket.contents}
-              <br />
-              어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고
-              저쩌고 어쩌고 저쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고
-              저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고
-              어쩌고 저쩌고 어쩌고 저쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 ...
             </div>
           </div>
           <div className="gray-line w-full h-[1px] bg-gray-100 mt-5"></div>
