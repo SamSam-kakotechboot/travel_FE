@@ -2,12 +2,11 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Tickets from './pages/Tickets';
 import TicketDetail from './pages/TicketDetail';
 import Cart from './pages/Cart';
 import MyOrder from './pages/MyOrder';
 import { cartAuthLoader, loginAuthLoader } from './utils/authAction';
-import { homeLoader } from './utils/loader';
+import { homeLoader, ticketLoader } from './utils/loader';
 
 export const router = createBrowserRouter([
   {
@@ -16,8 +15,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home />, loader: homeLoader },
       { path: 'login', element: <Login />, loader: loginAuthLoader },
-      { path: 'tickets', element: <Tickets /> },
-      { path: 'tickets/:id', element: <TicketDetail /> },
+      { path: 'tickets/:id', element: <TicketDetail />, loader: ticketLoader },
       { path: 'cart', element: <Cart />, loader: cartAuthLoader },
       { path: 'myorder', element: <MyOrder /> },
     ],

@@ -3,16 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import StarIcon from './icons/StarIcon';
 import HalfStarIcon from './icons/HalfStarIcon';
 import disneylandImage from '../assets/disneyland.png'; // 이미지 파일 import
+import StarRating from './Star';
 
 export default function HomeProduct({ ticket }) {
   const navigate = useNavigate();
   const handleProductClick = () => {
     navigate(`/tickets/${ticket.ticketID}`);
   };
-
-  // 별 아이콘 표시 로직
-  const fullStars = Math.floor(ticket.rating);
-  const halfStar = ticket.rating % 1 >= 0.5;
 
   return (
     <div
@@ -30,10 +27,7 @@ export default function HomeProduct({ ticket }) {
         {ticket.title}
       </div>
       <div className="flex items-center gap-[2px] mt-2">
-        {[...Array(fullStars)].map((_, i) => (
-          <StarIcon key={i} />
-        ))}
-        {halfStar && <HalfStarIcon />}
+        <StarRating rating={ticket.rating} />
         <span className="text-black text-sm font-poppins font-normal ml-2">
           {ticket.rating}/5
         </span>

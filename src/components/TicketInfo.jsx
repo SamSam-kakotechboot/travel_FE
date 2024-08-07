@@ -6,7 +6,7 @@ import StarIcon from './icons/StarIcon';
 import HalfStarIcon from './icons/HalfStarIcon';
 import InfoIcon from './icons/InfoIcon';
 import disneylandImage from '../assets/disneyland.png'; // 이미지 파일 import
-
+import StarRating from './Star';
 const TicketInfo = ({ ticket }) => {
   const [quantity, setQuantity] = useState(1);
 
@@ -39,17 +39,13 @@ const TicketInfo = ({ ticket }) => {
             </div>
             {/* Star Rating Section */}
             <div className="star-wrapper flex items-center mt-2 mb-[5px] h-[30px]">
-              <div className="star-wrapper flex items-center">
-                <StarIcon className="mr-[3px]" />
-                <StarIcon className="mr-[3px]" />
-                <StarIcon className="mr-[3px]" />
-                <StarIcon className="mr-[3px]" />
-                <HalfStarIcon />
-              </div>
-              <span className="ml-2 text-black text-sm italic">4.5/5.5</span>
+              <StarRating rating={ticket.rating} />
+              <span className="ml-2 text-black text-sm italic">
+                {ticket.rating}/5.0
+              </span>
             </div>
             <div className="text-wrapper-ticket-price text-2xl font-bold text-black mb-[10px] text-left">
-              {ticket.price.toLocaleString()}
+              {parseInt(ticket.price).toLocaleString()} 원
             </div>
             <div className="text-wrapper-ticket-info text-base text-black mt-1 text-left">
               장소: {ticket.place}
@@ -74,7 +70,7 @@ const TicketInfo = ({ ticket }) => {
               </div>
             </div>
             <div className="text-wrapper-ticket-content text-base text-black/60 mt-3 mb-10">
-              {ticket.contents}
+              {ticket.content}
               <br />
               어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고
               저쩌고 어쩌고 저쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고
@@ -94,7 +90,7 @@ const TicketInfo = ({ ticket }) => {
                 >
                   -
                 </button>
-                <div className="quantity-display flex-1 text-xl text-sm italic text-center">
+                <div className="quantity-display flex-1 text-xl italic text-center">
                   {quantity}
                 </div>
                 <button
