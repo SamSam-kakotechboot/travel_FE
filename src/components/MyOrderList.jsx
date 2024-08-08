@@ -17,12 +17,16 @@ export default function MyOrderList() {
               </div>
               <div className="h-[118px] flex flex-col justify-between items-start">
                 <div className="flex flex-col justify-start items-start gap-[2px]">
-                  <div className="text-black text-[20px] font-bold break-words">
+                  <div className="text-black text-xl font-bold break-words">
                     DisneyLand Paris
                   </div>
+                  <div className="text-gray-500 text-[12px]">
+                    2024.07.26 주문
+                  </div>
+                  <div className="text-gray-500 text-[12px]">1개</div>
                 </div>
                 <div />
-                <div className="text-black text-[24px] font-extrabold break-words">
+                <div className="text-black text-xl font-extrabold break-words">
                   120,000 ₩
                 </div>
               </div>
@@ -37,7 +41,9 @@ export default function MyOrderList() {
                 />
               </div>
             </div>
-            <div className="w-full h-px bg-black bg-opacity-10 opacity-50 mt-4" />
+            {index < 2 && ( // 전체 개수에 따라 바뀌도록 수정 필요
+              <div className="w-full h-px bg-black bg-opacity-10 opacity-50 mt-4" />
+            )}
           </div>
         ))}
       </div>
