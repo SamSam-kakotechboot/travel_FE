@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import TicketDetail from './pages/TicketDetail';
 import Cart from './pages/Cart';
-import MyOrder from './pages/MyOrder';
+import MyPage from './pages/MyPage';
 import { cartAuthLoader, loginAuthLoader } from './utils/authAction';
 import { homeLoader, ticketLoader } from './utils/loader';
 
@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
       { path: 'login', element: <Login />, loader: loginAuthLoader },
       { path: 'tickets/:id', element: <TicketDetail />, loader: ticketLoader },
       { path: 'cart', element: <Cart />, loader: cartAuthLoader },
-      { path: 'myorder', element: <MyOrder /> },
+      { path: 'mypage', element: <MyPage /> },
     ],
   },
 ]);
