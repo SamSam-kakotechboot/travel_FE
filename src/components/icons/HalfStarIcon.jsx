@@ -4,7 +4,7 @@ const HalfStarIcon = props => (
   <svg
     className={`h-6 w-6 ${props.className}`}
     fill="none"
-    viewBox="0 0 12 23"
+    viewBox="0 0 25 23"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
