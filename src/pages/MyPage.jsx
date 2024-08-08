@@ -6,7 +6,7 @@ import MyOrderList from '../components/MyOrderList';
 import { eraseCookie } from '../utils/cookie';
 import { clearCredentials } from '../store/authSlice';
 
-export default function MyOrder() {
+export default function MyPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Tickets from './pages/Tickets';
 import TicketDetail from './pages/TicketDetail';
 import Cart from './pages/Cart';
-import MyOrder from './pages/MyOrder';
+import MyPage from './pages/MyPage';
 import { cartAuthLoader, loginAuthLoader } from './utils/authAction';
 
 export const router = createBrowserRouter([
@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
       { path: 'tickets', element: <Tickets /> },
       { path: 'tickets/:id', element: <TicketDetail /> },
       { path: 'cart', element: <Cart />, loader: cartAuthLoader },
-      { path: 'myorder', element: <MyOrder /> },
+      { path: 'mypage', element: <MyPage /> },
     ],
   },
 ]);

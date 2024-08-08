@@ -26,7 +26,7 @@ export function cartAuthLoader() {
 export function loginAuthLoader() {
   const token = getAuthToken();
   if (token) {
-    return redirect('/myorder');
+    return redirect('/mypage');
   }
   return null;
 }
