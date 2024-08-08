@@ -11,16 +11,16 @@ export default function CartDetail() {
   const cartItems = useSelector(state => state.cart.cartItems);
   const dispatch = useDispatch();
 
-  const handleIncreaseQuantity = ticketId => {
-    dispatch(increaseQuantity(ticketId));
+  const handleIncreaseQuantity = ticketID => {
+    dispatch(increaseQuantity({ ticketID }));
   };
 
-  const handleDecreaseQuantity = ticketId => {
-    dispatch(decreaseQuantity(ticketId));
+  const handleDecreaseQuantity = ticketID => {
+    dispatch(decreaseQuantity({ ticketID }));
   };
 
-  const handleRemoveFromCart = ticketId => {
-    dispatch(removeFromCart(ticketId));
+  const handleRemoveFromCart = ticketID => {
+    dispatch(removeFromCart({ ticketID }));
   };
 
   return (
@@ -28,7 +28,7 @@ export default function CartDetail() {
       <div className="space-y-4">
         {cartItems.map((item, index, array) => (
           <CartItem
-            key={item.ticketId}
+            key={item.ticketID}
             item={item}
             isLast={index === array.length - 1}
             onIncreaseQuantity={handleIncreaseQuantity}
@@ -56,8 +56,8 @@ function CartItem({
     >
       <div className="bg-zinc-100 rounded-lg justify-center items-center flex">
         <img
-          src={`https://via.placeholder.com/125x154?text=Item+${item.ticketId}`}
-          alt={`Item ${item.ticketId}`}
+          src={`https://via.placeholder.com/125x154?text=Item+${item.ticketID}`}
+          alt={`Item ${item.ticketID}`}
           className="w-full h-full object-cover"
         />
       </div>
@@ -76,12 +76,12 @@ function CartItem({
       <div className="w-[225px] h-[180px] flex flex-col justify-between items-end">
         <TrashCanIcon
           isClickable={true}
-          onClick={() => onRemoveFromCart(item.ticketId)}
+          onClick={() => onRemoveFromCart(item.ticketID)}
         />
         <div className="quantity-button w-[170px] h-[56px] flex items-center rounded-full bg-[#F0F0F0] px-4">
           <button
             className="w-[40px] h-[40px] flex items-center justify-center text-2xl"
-            onClick={() => onDecreaseQuantity(item.ticketId)}
+            onClick={() => onDecreaseQuantity(item.ticketID)}
           >
             -
           </button>
@@ -90,7 +90,7 @@ function CartItem({
           </div>
           <button
             className="w-[40px] h-[40px] flex items-center justify-center text-2xl"
-            onClick={() => onIncreaseQuantity(item.ticketId)}
+            onClick={() => onIncreaseQuantity(item.ticketID)}
           >
             +
           </button>
