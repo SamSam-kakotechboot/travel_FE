@@ -3,9 +3,9 @@ import { getCookie, setCookie, eraseCookie } from '../utils/cookie';
 
 const initialState = {
   token: getCookie('token'),
-  role: null,
+  role: getCookie('role'),
   isAuthenticated: !!getCookie('token'),
-  user: null,
+  user: getCookie('user') ? JSON.parse(getCookie('user')) : null,
 };
 
 const authSlice = createSlice({
@@ -18,7 +18,12 @@ const authSlice = createSlice({
       state.role = role;
       state.isAuthenticated = true;
       state.user = user;
-      setCookie('token', token, 1, { secure: true, sameSite: 'Strict' });
+      setCookie('token', token, 7, { secure: true, sameSite: 'Strict' });
+      setCookie('role', role, 7, { secure: true, sameSite: 'Strict' });
+      setCookie('user', JSON.stringify(user), 7, {
+        secure: true,
+        sameSite: 'Strict',
+      });
     },
     clearCredentials: state => {
       state.token = null;
@@ -26,6 +31,8 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
       eraseCookie('token');
+      eraseCookie('role');
+      eraseCookie('user');
     },
   },
 });

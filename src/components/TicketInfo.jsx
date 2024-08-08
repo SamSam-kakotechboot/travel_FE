@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../store/cartSlice';
 import KeywordRectangle from './KeywordRectangle';
 import BlackButton from './BlackButton';
 import Tooltip from './Tooltip';
-import StarIcon from './icons/StarIcon';
-import HalfStarIcon from './icons/HalfStarIcon';
 import InfoIcon from './icons/InfoIcon';
-import disneylandImage from '../assets/disneyland.png'; // 이미지 파일 import
+import disneylandImage from '../assets/disneyland.png';
 import StarRating from './Star';
+
 const TicketInfo = ({ ticket }) => {
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.auth.user);
 
   const increaseQuantity = () => {
     setQuantity(prevQuantity => prevQuantity + 1);
@@ -16,6 +19,16 @@ const TicketInfo = ({ ticket }) => {
 
   const decreaseQuantity = () => {
     setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
+
+  const handleAddToCart = () => {
+    if (!user) {
+      alert('로그인한 후, 장바구니에 담을 수 있습니다.');
+      return;
+    }
+
+    dispatch(addToCart({ ...ticket, quantity }));
+    alert('장바구니에 담겼습니다.');
   };
 
   return (
@@ -105,7 +118,7 @@ const TicketInfo = ({ ticket }) => {
               width="300px"
               height="56px"
               text="장바구니 담기"
-              onClick={() => alert('장바구니에 담겼습니다.')}
+              onClick={handleAddToCart}
             />
           </div>
         </div>
