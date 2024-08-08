@@ -84,11 +84,6 @@ const TicketInfo = ({ ticket }) => {
             </div>
             <div className="text-wrapper-ticket-content text-base text-black/60 mt-3 mb-10">
               {ticket.content}
-              <br />
-              어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고
-              저쩌고 어쩌고 저쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고
-              저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고
-              어쩌고 저쩌고 어쩌고 저쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 ...
             </div>
           </div>
           <div className="gray-line w-full h-[1px] bg-gray-100 mt-5"></div>
