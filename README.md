@@ -4,25 +4,29 @@
 
 # Getting Started
 
+## 필수
+
 npm install
 
-npm create vite@latest
-
-(React, js) 선택
+npm create vite@latest . -- --template react
 
 npm install @reduxjs/toolkit react-redux
 
-npm install eslint prettier eslint-plugin-prettier eslint-config-prettier --save-dev
-
-(VsCode의 ESLint, Prettier - Code formatter 설치 필요)
-
-tailwind 설치 관련 참고
+npm install react-router-dom
 
 npm install -D tailwindcss postcss autoprefixer
 
 npx tailwindcss init -p
 
-(.eslintrc, .prettier, tailwind.config.js, vite 설정은 github에 같이 동봉하였음)
+이후 전체파일 루트 디렉토리에 붙여넣기
+
+---
+
+## 선택
+
+npm install eslint prettier eslint-plugin-prettier eslint-config-prettier --save-dev
+
+(VsCode의 ESLint, Prettier - Code formatter 설치 필요)
 
 ## 로컬 환경 구성
 
