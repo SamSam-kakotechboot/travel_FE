@@ -1,15 +1,29 @@
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
+const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+
 export const apiRequest = (isSignUpMode, formData) => {
   const endpoint = isSignUpMode ? '/auth/signUp' : '/auth/login';
   const url = `${apiUrl}${endpoint}`;
 
+  // 로그인 모드일 경우 id와 password만 추출
+  const payload = isSignUpMode
+    ? formData
+    : {
+        id: formData.id,
+        password: formData.password,
+      };
+
+  // console.log('Payload:', payload);
+
   return fetch(url, {
     method: 'POST',
     headers: {
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(formData),
+    body: JSON.stringify(payload),
   })
     .then(response => {
       if (!response.ok) {
@@ -18,11 +32,12 @@ export const apiRequest = (isSignUpMode, formData) => {
       return response.json();
     })
     .then(data => {
+      console.log(data);
       return {
-        token: data.token,
-        role: data.role,
+        token: data.data.token,
+        role: data.data.role,
         message: `${formData.id} 로그인 되었습니다.`,
-        user: data.user,
+        user: data.data.user,
       };
     })
     .catch(error => {
