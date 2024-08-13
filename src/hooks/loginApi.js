@@ -20,7 +20,7 @@ export const apiRequest = (isSignUpMode, formData) => {
   return fetch(url, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${token}`,
+      // Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(payload),
@@ -31,13 +31,18 @@ export const apiRequest = (isSignUpMode, formData) => {
       }
       return response.json();
     })
-    .then(data => {
-      console.log(data);
+    .then(jsonData => {
+      console.log(jsonData);
       return {
-        token: data.data.token,
-        role: data.data.role,
+        token: jsonData.data.token,
+        role: jsonData.data.role,
         message: `${formData.id} 로그인 되었습니다.`,
-        user: data.data.user,
+        user: {
+          id: 'test',
+          password: 'test',
+          name: '홍길동',
+          phone: '010-1234-5678',
+        },
       };
     })
     .catch(error => {
