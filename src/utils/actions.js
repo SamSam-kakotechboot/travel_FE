@@ -6,12 +6,7 @@ export async function cartAction({ request }) {
   const formData = await request.formData();
   const orders = JSON.parse(formData.get('orders'));
   const totalAmount = formData.get('totalAmount');
-
   const token = getAuthToken();
-
-  console.log(orders);
-  console.log(totalAmount);
-  console.log(token);
 
   try {
     const response = await fetch(`${apiUrl}/api/orders`, {
