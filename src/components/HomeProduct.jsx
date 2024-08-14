@@ -1,7 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import StarIcon from './icons/StarIcon';
-import HalfStarIcon from './icons/HalfStarIcon';
 import disneylandImage from '../assets/disneyland.png'; // 이미지 파일 import
 import StarRating from './Star';
 
