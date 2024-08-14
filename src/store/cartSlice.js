@@ -11,7 +11,7 @@ const cartSlice = createSlice({
     addToCart: (state, action) => {
       const item = action.payload;
       const existingItem = state.cartItems.find(
-        cartItem => cartItem.ticketID === item.ticketID
+        cartItem => cartItem.ticketId === item.ticketId
       );
 
       if (existingItem) {
@@ -21,18 +21,18 @@ const cartSlice = createSlice({
       }
     },
     removeFromCart: (state, action) => {
-      const { ticketID } = action.payload;
+      const { ticketId } = action.payload;
       state.cartItems = state.cartItems.filter(
-        cartItem => cartItem.ticketID !== ticketID
+        cartItem => cartItem.ticketId !== ticketId
       );
     },
     clearCart: state => {
       state.cartItems = [];
     },
     increaseQuantity: (state, action) => {
-      const { ticketID } = action.payload;
+      const { ticketId } = action.payload;
       const existingItem = state.cartItems.find(
-        cartItem => cartItem.ticketID === ticketID
+        cartItem => cartItem.ticketId === ticketId
       );
 
       if (existingItem) {
@@ -40,9 +40,9 @@ const cartSlice = createSlice({
       }
     },
     decreaseQuantity: (state, action) => {
-      const { ticketID } = action.payload;
+      const { ticketId } = action.payload;
       const existingItem = state.cartItems.find(
-        cartItem => cartItem.ticketID === ticketID
+        cartItem => cartItem.ticketId === ticketId
       );
 
       if (existingItem && existingItem.quantity > 1) {
@@ -50,7 +50,7 @@ const cartSlice = createSlice({
       } else {
         // 수량이 0이 되면 장바구니에서 제거
         state.cartItems = state.cartItems.filter(
-          cartItem => cartItem.ticketID !== ticketID
+          cartItem => cartItem.ticketId !== ticketId
         );
       }
     },

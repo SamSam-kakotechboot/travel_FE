@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import TicketInfo from '../components/TicketInfo';
 import Reviews from '../components/Reviews';
 import ReviewForm from '../components/ReviewForm';
@@ -12,6 +12,8 @@ export default function TicketDetail() {
     setShowReviewForm(true);
   };
 
+  // console.log(ticket);
+
   return (
     <div>
       <div className="relative bg-white min-h-screen">
@@ -19,10 +21,10 @@ export default function TicketDetail() {
           <>
             <TicketInfo ticket={ticket} />
             {showReviewForm ? (
-              <ReviewForm id={ticket.ticketID} />
+              <ReviewForm id={ticket.ticketId} />
             ) : (
               <Reviews
-                id={ticket.ticketID}
+                id={ticket.ticketId}
                 onReviewButtonClick={handleReviewButtonClick}
               />
             )}

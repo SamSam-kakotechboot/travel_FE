@@ -7,6 +7,7 @@ import Cart from './pages/Cart';
 import MyPage from './pages/MyPage';
 import { cartAuthLoader, loginAuthLoader } from './utils/authAction';
 import { homeLoader, ticketLoader } from './utils/loader';
+import { cartAction } from './utils/actions';
 
 export const router = createBrowserRouter([
   {
@@ -16,7 +17,12 @@ export const router = createBrowserRouter([
       { index: true, element: <Home />, loader: homeLoader },
       { path: 'login', element: <Login />, loader: loginAuthLoader },
       { path: 'tickets/:id', element: <TicketDetail />, loader: ticketLoader },
-      { path: 'cart', element: <Cart />, loader: cartAuthLoader },
+      {
+        path: 'cart',
+        element: <Cart />,
+        loader: cartAuthLoader,
+        action: cartAction,
+      },
       { path: 'mypage', element: <MyPage /> },
     ],
   },

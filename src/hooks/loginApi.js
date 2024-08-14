@@ -1,8 +1,5 @@
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
-
 export const apiRequest = (isSignUpMode, formData) => {
   const endpoint = isSignUpMode ? '/auth/signUp' : '/auth/login';
   const url = `${apiUrl}${endpoint}`;
@@ -38,10 +35,7 @@ export const apiRequest = (isSignUpMode, formData) => {
         role: jsonData.data.role,
         message: `${formData.id} 로그인 되었습니다.`,
         user: {
-          id: 'test',
-          password: 'test',
           name: '홍길동',
-          phone: '010-1234-5678',
         },
       };
     })
