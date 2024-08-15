@@ -1,0 +1,23 @@
+import { createBrowserRouter } from 'react-router-dom';
+import App from './App';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import TicketDetail from './pages/TicketDetail';
+import Cart from './pages/Cart';
+import MyPage from './pages/MyPage';
+import { cartAuthLoader, loginAuthLoader } from './utils/authAction';
+import { homeLoader, ticketLoader } from './utils/loader';
+
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      { index: true, element: <Home />, loader: homeLoader },
+      { path: 'login', element: <Login />, loader: loginAuthLoader },
+      { path: 'tickets/:id', element: <TicketDetail />, loader: ticketLoader },
+      { path: 'cart', element: <Cart />, loader: cartAuthLoader },
+      { path: 'mypage', element: <MyPage /> },
+    ],
+  },
+]);

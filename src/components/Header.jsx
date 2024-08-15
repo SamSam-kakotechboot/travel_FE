@@ -1,29 +1,33 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import CartIcon from './icons/CartIcon';
+import AccountIcon from './icons/AccountIcon';
 
-const Header = () => {
+export default function Header() {
+  const navigate = useNavigate();
+
   return (
-    <div className="absolute w-[1380px] h-[93px] left-[29px] top-0 flex justify-center items-center gap-[40px]">
-      <div className="text-black text-3xl font-bold font-poppins break-words">
-        SamSam
-      </div>
-      <div className="flex-1 h-12 px-4 py-3 bg-gray-100 rounded-full flex items-center gap-3">
-        <div className="relative w-6 h-6">
-          <div className="absolute w-[20.27px] h-[20.27px] left-[1.86px] top-[1.86px] bg-black opacity-40"></div>
+    <div className="px-12">
+      <header className="flex items-center justify-between px-8 py-6 border-b border-gray-100 bg-white w-full z-10 relative">
+        <div
+          className="text-black text-4xl font-poppins font-bold cursor-pointer"
+          onClick={() => navigate('/')}
+        >
+          SamSam
         </div>
-        <div className="text-gray-400 text-base font-normal font-poppins break-words">
-          Search for products...
+        <div className="flex flex-1 items-center bg-[#F0F0F0] rounded-full mx-8 px-4">
+          <span className="material-icons text-gray-400 mr-2">search</span>
+          <input
+            type="text"
+            placeholder="Search for products..."
+            className="flex-1 py-2 bg-transparent outline-none text-base font-poppins"
+          />
         </div>
-      </div>
-      <div className="flex items-start gap-[14px]">
-        <div className="relative w-6 h-6">
-          <div className="absolute w-[22.13px] h-[20.25px] top-[1.88px] bg-black"></div>
+        <div className="flex items-center gap-6">
+          <CartIcon isClickable={true} onClick={() => navigate('/cart')} />
+          <AccountIcon isClickable={true} onClick={() => navigate('/login')} />
         </div>
-        <div className="relative w-6 h-6">
-          <div className="absolute w-[20.25px] h-[20.25px] top-[1.88px] bg-black"></div>
-        </div>
-      </div>
+      </header>
     </div>
   );
-};
-
-export default Header;
+}
