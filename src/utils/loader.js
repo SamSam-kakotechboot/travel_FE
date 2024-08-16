@@ -1,4 +1,5 @@
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import { getAuthToken } from './authAction';
 
 export async function homeLoader({ request }) {
   // URLSearchParams를 사용하여 현재 요청의 쿼리 파라미터를 가져옵니다.
@@ -54,5 +55,30 @@ export async function ticketLoader({ params }) {
   } catch (error) {
     console.error('Error fetching ticket:', error);
     throw new Error(`Ticket with ID ${id} not found`); // 에러 메시지 출력 및 다시 던지기
+  }
+}
+
+export async function myPageLoader() {
+  const token = getAuthToken();
+
+  try {
+    const response = await fetch(`${apiUrl}/api/orders`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch orders');
+    }
+
+    // JSON 파싱
+    const data = await response.json();
+    return data.data; // 필요한 데이터를 반환
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    return null;
   }
 }

@@ -6,7 +6,7 @@ import TicketDetail from './pages/TicketDetail';
 import Cart from './pages/Cart';
 import MyPage from './pages/MyPage';
 import { cartAuthLoader, loginAuthLoader } from './utils/authAction';
-import { homeLoader, ticketLoader } from './utils/loader';
+import { homeLoader, myPageLoader, ticketLoader } from './utils/loader';
 import { cartAction } from './utils/actions';
 
 export const router = createBrowserRouter([
@@ -23,7 +23,7 @@ export const router = createBrowserRouter([
         loader: cartAuthLoader,
         action: cartAction,
       },
-      { path: 'mypage', element: <MyPage /> },
+      { path: 'mypage', element: <MyPage />, loader: myPageLoader },
     ],
   },
 ]);

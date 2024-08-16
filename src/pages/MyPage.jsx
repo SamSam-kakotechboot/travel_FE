@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLoaderData } from 'react-router-dom';
 import CartIcon from '../components/icons/CartIcon';
 import ReviewIcon from '../assets/writing.svg';
 import MyOrderList from '../components/MyOrderList';
@@ -11,6 +11,9 @@ import { clearCredentials } from '../store/authSlice';
 export default function MyPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const orders = useLoaderData(); // API로부터 로드된 데이터를 받아옴 (수정: orders를 직접 받아오도록 변경)
+
+  console.log(orders); // 받아온 orders 데이터 콘솔 출력
 
   const handleLogout = () => {
     dispatch(clearCredentials());
@@ -30,14 +33,14 @@ export default function MyPage() {
           </button>
         </div>
         <div className="flex gap-8">
-          <div className="w-1/2">
+          <div className="w-1/2 min-w-128">
             <div className="flex items-center mb-4">
               <CartIcon className="w-8 h-8 mr-3" />
               <h2 className="text-2xl font-semibold">주문내역</h2>
             </div>
-            <MyOrderList />
+            <MyOrderList orders={orders} />
           </div>
-          <div className="w-1/2">
+          <div className="w-1/2 min-w-96">
             <div className="flex items-center mb-4">
               <img
                 src={ReviewIcon}
