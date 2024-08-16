@@ -7,11 +7,11 @@ export default function MyReviewList() {
         {[...Array(2)].map((_, index) => (
           <div key={index}>
             <div className="flex w-full items-start gap-4 p-3 bg-white rounded-lg">
-              <div className="rounded-lg justify-center items-center flex">
+              <div className="flex-shrink-0 w-[125px] h-[154px] rounded-lg flex justify-center items-center">
                 <img
                   src={`https://via.placeholder.com/125x154?text=Item+${index + 1}`}
                   alt={`Item ${index + 1}`}
-                  className="w-full h-full object-cover"
+                  className="block w-[125px] h-[154px] object-cover"
                 />
               </div>
               <div className="flex flex-col justify-start items-start">

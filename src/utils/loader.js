@@ -5,7 +5,7 @@ export async function homeLoader({ request }) {
   // URLSearchParams를 사용하여 현재 요청의 쿼리 파라미터를 가져옵니다.
   const url = new URL(request.url);
   const pageNumber = url.searchParams.get('pageNumber') || 1; // 기본값: 1
-  const pageSize = url.searchParams.get('pageSize') || 10; // 기본값: 10
+  const pageSize = url.searchParams.get('pageSize') || 20; // 기본값: 10
 
   try {
     const response = await fetch(
@@ -76,6 +76,7 @@ export async function myPageLoader() {
 
     // JSON 파싱
     const data = await response.json();
+    console.log(data.data);
     return data.data; // 필요한 데이터를 반환
   } catch (error) {
     console.error('Error fetching orders:', error);

@@ -1,17 +1,20 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate, useSubmit } from 'react-router-dom';
+import { useSubmit, useNavigate } from 'react-router-dom';
+import { cartAction } from '../utils/actions';
 
 export default function CartTotal() {
   const cartItems = useSelector(state => state.cart.cartItems);
+  const dispatch = useDispatch();
   const submit = useSubmit();
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   const totalAmount = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     const formData = new FormData();
     formData.append(
       'orders',
@@ -25,7 +28,14 @@ export default function CartTotal() {
     );
     formData.append('totalAmount', totalAmount);
 
-    submit(formData, { method: 'post', action: '/cart' });
+    const result = await dispatch(cartAction({ formData })); // Thunk 액션 호출
+
+    if (cartAction.fulfilled.match(result)) {
+      // 액션이 성공적으로 완료되었는지 확인
+      navigate('/'); // 성공 시 홈으로 리다이렉트
+    } else {
+      console.error('Order submission failed'); // 실패 시 추가 처리
+    }
   };
 
   return (
