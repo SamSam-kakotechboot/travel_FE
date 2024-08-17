@@ -11,9 +11,9 @@ import { clearCredentials } from '../store/authSlice';
 export default function MyPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const orders = useLoaderData(); // API로부터 로드된 데이터를 받아옴
+  const { orders, reviews } = useLoaderData(); // Destructure orders and reviews
 
-  console.log(orders); // 받아온 orders 데이터 콘솔 출력
+  console.log(reviews);
 
   const handleLogout = () => {
     dispatch(clearCredentials());
@@ -49,7 +49,7 @@ export default function MyPage() {
               />
               <h2 className="text-2xl font-semibold">리뷰내역</h2>
             </div>
-            <MyReviewList />
+            <MyReviewList reviews={reviews} />
           </div>
         </div>
       </div>

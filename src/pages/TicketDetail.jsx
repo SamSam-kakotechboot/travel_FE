@@ -8,17 +8,16 @@ import { myPageLoader } from '../utils/loader'; // myPageLoader를 가져옵니�
 export default function TicketDetail() {
   const ticket = useLoaderData();
   const [showReviewForm, setShowReviewForm] = useState(false);
-  const [reviewId, setReviewId] = useState(null); // reviewId를 위한 상태를 추가합니다.
+  const [orderId, setOrderId] = useState(null);
 
   const handleReviewButtonClick = async () => {
     try {
-      const orders = await myPageLoader(); // 주문 내역을 불러옵니다.
+      const orders = await myPageLoader();
       const matchingOrder = orders.find(
         order => order.ticketId === ticket.ticketId
       );
-
       if (matchingOrder) {
-        setReviewId(matchingOrder.reviewId); // 일치하는 주문이 있으면 reviewId를 설정합니다.
+        setOrderId(matchingOrder.orderId);
         setShowReviewForm(true);
       } else {
         alert('구매 후 리뷰 작성이 가능합니다');
@@ -37,7 +36,7 @@ export default function TicketDetail() {
           <>
             <TicketInfo ticket={ticket} />
             {showReviewForm ? (
-              <ReviewForm id={ticket.ticketId} reviewId={reviewId} /> // reviewId를 ReviewForm에 전달합니다.
+              <ReviewForm id={ticket.ticketId} orderId={orderId} />
             ) : (
               <Reviews
                 id={ticket.ticketId}

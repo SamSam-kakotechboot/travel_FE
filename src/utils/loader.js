@@ -62,24 +62,40 @@ export async function myPageLoader() {
   const token = getAuthToken();
 
   try {
-    const response = await fetch(`${apiUrl}/api/orders`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    // Making two API requests concurrently
+    const [ordersResponse, reviewsResponse] = await Promise.all([
+      fetch(`${apiUrl}/api/orders`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+      fetch(`${apiUrl}/api/review/view/my`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    ]);
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch orders');
+    // Check if both requests were successful
+    if (!ordersResponse.ok || !reviewsResponse.ok) {
+      throw new Error('Failed to fetch orders or reviews');
     }
 
-    // JSON 파싱
-    const data = await response.json();
-    console.log(data.data);
-    return data.data; // 필요한 데이터를 반환
+    // Parse JSON responses
+    const ordersData = await ordersResponse.json();
+    const reviewsData = await reviewsResponse.json();
+
+    // Return both pieces of data
+    return {
+      orders: ordersData.data, // Assuming the response structure contains the data you need
+      reviews: reviewsData.data, // Adjust as necessary
+    };
   } catch (error) {
-    console.error('Error fetching orders:', error);
-    return null;
+    console.error('Error fetching orders or reviews:', error);
+    return { orders: null, reviews: null }; // Return null for both if there was an error
   }
 }
