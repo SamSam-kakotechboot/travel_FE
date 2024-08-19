@@ -5,13 +5,13 @@ import KeywordRectangle from './KeywordRectangle';
 import BlackButton from './BlackButton';
 import Tooltip from './Tooltip';
 import InfoIcon from './icons/InfoIcon';
-import disneylandImage from '../assets/disneyland.png';
 import StarRating from './Star';
 
 const TicketInfo = ({ ticket }) => {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
   const increaseQuantity = () => {
     setQuantity(prevQuantity => prevQuantity + 1);
@@ -39,8 +39,8 @@ const TicketInfo = ({ ticket }) => {
         <div className="image-container w-[430px] h-[450px] rounded-lg object-cover">
           <img
             className="ticket-image w-[430px] h-[450px] rounded-lg object-cover"
-            src={disneylandImage}
-            alt="DisneyLand Paris"
+            src={`${apiUrl}/api/images/${ticket.title}.png`} // 백엔드에서 이미지를 불러옴
+            alt={ticket.title}
           />
         </div>
 

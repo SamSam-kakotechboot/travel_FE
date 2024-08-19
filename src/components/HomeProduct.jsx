@@ -1,10 +1,12 @@
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import disneylandImage from '../assets/disneyland.png'; // 이미지 파일 import
 import StarRating from './Star';
 
 export default function HomeProduct({ ticket }) {
   const navigate = useNavigate();
+  
   const handleProductClick = () => {
     navigate(`/tickets/${ticket.ticketId}`);
   };
@@ -17,8 +19,8 @@ export default function HomeProduct({ ticket }) {
       <div className="w-full h-[298px]">
         <img
           className="w-full h-full object-cover rounded-xl"
-          src={disneylandImage}
-          alt="disneyland"
+          src={`${apiUrl}/api/images/${ticket.title}.png`} //
+          alt={ticket.title}
         />
       </div>
       <div className="text-black text-lg font-poppins font-bold mt-4">
