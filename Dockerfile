@@ -25,7 +25,6 @@ FROM nginx:alpine
 # 빌드된 파일을 Nginx 기본 경로로 복사
 COPY --from=build /app/dist /usr/share/nginx/html
 
-
 # Nginx 설정 파일을 복사
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 
