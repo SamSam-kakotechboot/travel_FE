@@ -3,7 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import TicketInfo from '../components/TicketInfo';
 import Reviews from '../components/Reviews';
 import ReviewForm from '../components/ReviewForm';
-import { myPageLoader } from '../utils/loader'; // myPageLoader를 가져옵니다.
+import { myPageLoader } from '../utils/loader';
 
 export default function TicketDetail() {
   const ticket = useLoaderData();
@@ -12,7 +12,12 @@ export default function TicketDetail() {
 
   const handleReviewButtonClick = async () => {
     try {
-      const orders = await myPageLoader();
+      const { orders } = await myPageLoader();
+      
+      if (!orders) {
+        throw new Error('Orders not found');
+      }
+
       const matchingOrder = orders.find(
         order => order.ticketId === ticket.ticketId
       );

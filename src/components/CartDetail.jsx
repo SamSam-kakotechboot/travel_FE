@@ -5,6 +5,7 @@ import {
   decreaseQuantity,
   removeFromCart,
 } from '../store/cartSlice';
+import useFetchImage from '../hooks/useFetchImage';
 import TrashCanIcon from './icons/TrashCanIcon';
 
 export default function CartDetail() {
@@ -48,18 +49,30 @@ function CartItem({
   onDecreaseQuantity,
   onRemoveFromCart,
 }) {
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+  const { imageSrc, loading, error } = useFetchImage(apiUrl, `api/images/${item.title}.png`);
+
   return (
     <div
       className={`flex w-full items-center gap-6 p-2 bg-white ${
         !isLast ? 'border-b border-gray-100' : ''
       }`}
     >
-      <div className="bg-zinc-100 rounded-lg justify-center items-center flex">
-        <img
-          src={`https://via.placeholder.com/125x154?text=Item+${item.ticketId}`}
-          alt={`Item ${item.ticketId}`}
-          className="w-full h-full object-cover"
-        />
+      <div className="bg-zinc-100 rounded-lg justify-center items-center flex" style={{ width: '125px', height: '154px' }}>
+        {loading && <div>이미지를 불러오는 중...</div>}
+        {error && <div>{error}</div>}
+        {!loading && !error && (
+          <img
+            src={imageSrc}
+            alt={`Item ${item.title}`}
+            className="rounded-lg"
+            style={{
+              width: '100%', // 부모 요소의 너비에 맞춤
+              height: '100%', // 부모 요소의 높이에 맞춤
+              objectFit: 'cover' // 이미지 비율을 유지하며, 부모 요소에 맞춤
+            }}
+          />
+        )}
       </div>
       <div className="h-[154px] flex flex-col justify-between items-start w-[120px]">
         <div className="flex flex-col justify-start items-start gap-[2px]">

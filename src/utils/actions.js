@@ -2,7 +2,6 @@ const apiUrl = import.meta.env.VITE_API_BASE_URL;
 import { getAuthToken } from './authAction';
 import { clearCart } from '../store/cartSlice';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { redirect } from 'react-router-dom';
 
 export const cartAction = createAsyncThunk(
   'cart/submitOrder',
@@ -41,7 +40,6 @@ export const ticketDetailAction = createAsyncThunk(
   'ticketDetail/submitReview',
   async ({ reviewData }, { rejectWithValue }) => {
     const token = getAuthToken();
-    console.log(JSON.stringify(reviewData));
     try {
       const response = await fetch(`${apiUrl}/api/review/regist`, {
         method: 'POST',
@@ -55,7 +53,6 @@ export const ticketDetailAction = createAsyncThunk(
       if (!response.ok) {
         return rejectWithValue('Failed to submit review');
       }
-
       const data = await response.json();
       return data; // 성공적으로 전송된 경우 서버의 응답 데이터를 반환
     } catch (error) {

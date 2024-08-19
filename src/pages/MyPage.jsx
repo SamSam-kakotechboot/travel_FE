@@ -12,9 +12,7 @@ export default function MyPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { orders, reviews } = useLoaderData(); // Destructure orders and reviews
-
-  console.log(reviews);
-
+  
   const handleLogout = () => {
     dispatch(clearCredentials());
     eraseCookie('token');

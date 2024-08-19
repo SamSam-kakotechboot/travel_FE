@@ -6,12 +6,15 @@ import BlackButton from './BlackButton';
 import Tooltip from './Tooltip';
 import InfoIcon from './icons/InfoIcon';
 import StarRating from './Star';
+import useFetchImage from '../hooks/useFetchImage';
 
 const TicketInfo = ({ ticket }) => {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
+  const { imageSrc, loading, error } = useFetchImage(apiUrl, `api/images/${ticket.title}.png`);
 
   const increaseQuantity = () => {
     setQuantity(prevQuantity => prevQuantity + 1);
@@ -37,11 +40,16 @@ const TicketInfo = ({ ticket }) => {
       <div className="flex gap-16">
         {/* Left Image Container */}
         <div className="image-container w-[430px] h-[450px] rounded-lg object-cover">
-          <img
-            className="ticket-image w-[430px] h-[450px] rounded-lg object-cover"
-            src={`${apiUrl}/api/images/${ticket.title}.png`} // 백엔드에서 이미지를 불러옴
-            alt={ticket.title}
-          />
+          {loading && <div>이미지를 불러오는 중...</div>}
+          {error && <div>{error}</div>}
+          {!loading && !error && (
+            <img
+              id="imageElement"
+              className="ticket-image w-[430px] h-[450px] rounded-lg object-cover"
+              src={imageSrc}
+              alt={ticket.title}
+            />
+          )}
         </div>
 
         {/* Right Info Section */}

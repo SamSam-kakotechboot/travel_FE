@@ -38,8 +38,6 @@ const Reviews = ({ id, onReviewButtonClick }) => {
     reviewsPerPage
   );
 
-  console.log(reviewsData);
-
   return (
     <div className="flex justify-center">
       <div className="reviews-container w-[1200px] mt-[36px]">
@@ -63,13 +61,9 @@ const Reviews = ({ id, onReviewButtonClick }) => {
         <div className="reviews-content flex flex-col items-center gap-4 p-6 rounded-lg">
           {currentReviews.map(review => (
             <Review
-              key={review.reviewId}
-              reviewer={review.userName}
-              score={review.rating}
-              content={review.comment}
-              date={new Date(review.regDate).toLocaleDateString()}
-              imgUrl={'https://via.placeholder.com/265x170'}
-            />
+            key={review.reviewId}
+            review={review}
+          />
           ))}
         </div>
 
