@@ -11,12 +11,16 @@ export default function Home() {
   const [viewall, setViewAll] = useState(false);
   const [ticketsPerPage, setTicketsPerPage] = useState(4);
 
+  // console.log(ticketsData);
+
   const totalPages = getTotalPages(ticketsData, ticketsPerPage);
   const currentTickets = getCurrentItems(
     ticketsData,
     currentPage,
     ticketsPerPage
   );
+
+  // console.log(currentTickets);
 
   useEffect(() => {
     window.scrollTo(0, 0); // 페이지 변경 시 스크롤을 맨 위로 이동
@@ -32,7 +36,7 @@ export default function Home() {
         )}
         <div className="flex flex-wrap justify-start gap-3">
           {currentTickets.map(ticket => (
-            <HomeProduct key={ticket.ticketID} ticket={ticket} />
+            <HomeProduct key={ticket.ticketId} ticket={ticket} />
           ))}
         </div>
         <div className="flex justify-center mt-8">

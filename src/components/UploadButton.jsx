@@ -22,7 +22,7 @@ const UploadButton = ({ onFileChange, uploadedFileName }) => {
         <input
           type="file"
           ref={fileInputRef}
-          onChange={onFileChange}
+          onChange={onFileChange} // 파일 선택 시 부모 컴포넌트로 파일 정보 전달
           className="hidden"
         />
       </div>

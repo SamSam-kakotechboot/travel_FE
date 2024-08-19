@@ -52,9 +52,9 @@ const TicketInfo = ({ ticket }) => {
             </div>
             {/* Star Rating Section */}
             <div className="star-wrapper flex items-center mt-2 mb-[5px] h-[30px]">
-              <StarRating rating={ticket.rating} />
+              <StarRating rating={ticket.avgRating} />
               <span className="ml-2 text-black text-sm italic">
-                {ticket.rating}/5.0
+                {ticket.avgRating}/5.0
               </span>
             </div>
             <div className="text-wrapper-ticket-price text-2xl font-bold text-black mb-[10px] text-left">
