@@ -1,7 +1,6 @@
 # 1단계: 빌드 스테이지
 FROM node:22.3.0-alpine AS build
 
-
 # npm 버전을 10.8.1로 업그레이드
 RUN npm install -g npm@10.8.1
 
