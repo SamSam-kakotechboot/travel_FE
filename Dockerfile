@@ -27,17 +27,16 @@ COPY --from=build /app/dist /usr/share/nginx/html
 
 # Nginx 설정 파일을 복사
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
-RUN chmod 644 /etc/nginx/conf.d/default.conf
 
 # 엔트리포인트 스크립트 복사
 COPY ./nginx/entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
 
-# Nginx 포트 노출
-EXPOSE 80
-
 # 엔트리포인트 설정
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]
+
+# Nginx 포트 노출
+EXPOSE 80
 
 # Nginx 실행
 CMD ["nginx", "-g", "daemon off;"]
