@@ -14,12 +14,13 @@ const useFetchImage = (apiUrl, imagePath) => {
         });
 
         if (!response.ok) {
-          throw new Error('이미지를 불러오는데 실패했습니다.');
+          setImageSrc('/src/assets/no_image.png');
         }
-
-        const imageBlob = await response.blob();
-        const imageObjectURL = URL.createObjectURL(imageBlob);
-        setImageSrc(imageObjectURL);
+        else{
+          const imageBlob = await response.blob();
+          const imageObjectURL = URL.createObjectURL(imageBlob);
+          setImageSrc(imageObjectURL);
+        }
       } catch (err) {
         setError(err.message);
       } finally {
