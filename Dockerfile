@@ -32,11 +32,11 @@ COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY ./nginx/entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
 
-# 엔트리포인트 설정
-ENTRYPOINT ["/usr/bin/entrypoint.sh"]
-
 # Nginx 포트 노출
 EXPOSE 80
+
+# 엔트리포인트 설정
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]
 
 # Nginx 실행
 CMD ["nginx", "-g", "daemon off;"]
