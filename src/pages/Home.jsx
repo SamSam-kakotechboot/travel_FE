@@ -1,50 +1,58 @@
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useSearchParams } from 'react-router-dom';
 import HomeProduct from '../components/HomeProduct';
-import { getCurrentItems, getTotalPages } from '../utils/pagination';
-import { useEffect, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import PageButtons from '../components/PageButtons';
 import Dropdown from '../components/DropDownButton';
+import { getUrlParams } from '../utils/urlParam';
 
 export default function Home() {
-  const ticketsData = useLoaderData(); // loader에서 가져온 데이터 사용
-  const navigate = useNavigate();
+  const { tickets, totalCount } = useLoaderData();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const initialPage = Number(urlParams.get('pageNumber')) || 1;
-  const initialPageSize = Number(urlParams.get('pageSize')) || 4;
-  const initialKeyword = urlParams.get('keyword') || 'Latest';
+  // URL 파라미터 가져오기
+  const { pageSize, pageNumber } = getUrlParams(searchParams);
 
-  const [currentPage, setCurrentPage] = useState(initialPage);
-  const [viewall, setViewAll] = useState(false);
-  const [ticketsPerPage, setTicketsPerPage] = useState(initialPageSize);
-  const [keyword, setKeyword] = useState(initialKeyword); // keyword 상태 추가
-
-  const totalPages = getTotalPages(ticketsData, ticketsPerPage);
-  const currentTickets = getCurrentItems(
-    ticketsData,
-    currentPage,
-    ticketsPerPage
+  const totalPages = useMemo(
+    () => Math.ceil(totalCount / Number(pageSize)),
+    [totalCount, pageSize]
   );
 
-  useEffect(() => {
-    window.scrollTo(0, 0); // 페이지 변경 시 스크롤을 맨 위로 이동
-  }, [currentPage]);
+  // viewall 상태를 pageSize에 따라 결정
+  const viewall = useMemo(() => pageSize === '12', [pageSize]);
 
-  useEffect(() => {
-    const params = new URLSearchParams({
-      pageNumber: currentPage,
-      pageSize: ticketsPerPage,
-    });
+  const updateParams = useCallback(
+    updates => {
+      const newParams = new URLSearchParams(searchParams);
+      Object.entries(updates).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          newParams.set(key, value);
+        } else {
+          newParams.delete(key);
+        }
+      });
+      setSearchParams(newParams);
+    },
+    [searchParams, setSearchParams]
+  );
 
-    if (keyword) {
-      params.append('keyword', keyword);
-    }
+  const handlePageChange = useCallback(
+    newPage => {
+      updateParams({ pageNumber: newPage });
+      window.scrollTo(0, 0);
+    },
+    [updateParams]
+  );
 
-    const newUrl = `?${params.toString()}`;
-    if (newUrl !== window.location.search) {
-      navigate(newUrl, { replace: true }); // URL이 변경될 때만 navigate
-    }
-  }, [keyword, currentPage, ticketsPerPage, navigate]);
+  const handleKeywordChange = useCallback(
+    newKeyword => {
+      updateParams({ keyword: newKeyword, pageNumber: 1 });
+    },
+    [updateParams]
+  );
+
+  const handleViewAll = useCallback(() => {
+    updateParams({ pageSize: 12, pageNumber: 1 });
+  }, [updateParams]);
 
   return (
     <div className="relative bg-white min-h-screen">
@@ -55,10 +63,10 @@ export default function Home() {
           </div>
         )}
         <div className="flex flex-wrap justify-start mx-4">
-          <Dropdown onSelect={setKeyword} />
+          <Dropdown onSelect={handleKeywordChange} />
         </div>
         <div className="flex flex-wrap justify-start gap-3">
-          {currentTickets.map(ticket => (
+          {tickets.map(ticket => (
             <HomeProduct key={ticket.ticketId} ticket={ticket} />
           ))}
         </div>
@@ -66,10 +74,7 @@ export default function Home() {
           {!viewall && (
             <button
               className="px-6 py-3 text-black text-base font-poppins font-medium border border-gray-200 rounded-full hover:bg-gray-100"
-              onClick={() => {
-                setTicketsPerPage(12);
-                setViewAll(true);
-              }}
+              onClick={handleViewAll}
             >
               View All
             </button>
@@ -77,8 +82,8 @@ export default function Home() {
           {viewall && (
             <PageButtons
               totalPages={totalPages}
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
+              currentPage={Number(pageNumber)}
+              onPageChange={handlePageChange}
             />
           )}
         </div>

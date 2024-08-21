@@ -1,18 +1,17 @@
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
 import { getAuthToken } from './authAction';
+import { json } from 'react-router-dom';
+import { getUrlParams } from './urlParam';
 
 export async function homeLoader({ request }) {
   const url = new URL(request.url);
-  const pageNumber = url.searchParams.get('pageNumber') || 1;
-  const pageSize = url.searchParams.get('pageSize') || 20;
-  const keyword = url.searchParams.get('keyword')
-    ? url.searchParams.get('keyword')
-    : 'Latest'; // keyword 쿼리 파라미터 추가
+  const params = getUrlParams(url.searchParams);
 
-  console.log(keyword);
+  const queryString = new URLSearchParams(params).toString();
+
   try {
     const response = await fetch(
-      `${apiUrl}/api/tickets/view/all?pageNumber=${pageNumber}&pageSize=${pageSize}&keyword=${keyword}`,
+      `${apiUrl}/api/tickets/view/all?${queryString}`,
       {
         method: 'GET',
         headers: {
@@ -22,16 +21,19 @@ export async function homeLoader({ request }) {
     );
 
     if (!response.ok) {
-      throw new Error('Failed to fetch tickets');
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const ticketData = await response.json();
-    return ticketData.data;
+
+    const responseData = await response.json();
+    return json({
+      tickets: responseData.data.tickets,
+      totalCount: responseData.data.totalItems,
+    });
   } catch (error) {
     console.error('Error fetching tickets:', error);
-    throw error;
+    throw json({ message: 'Failed to fetch tickets' }, { status: 500 });
   }
 }
-
 // /api/tickets/view/detail/{ticketId}
 
 export async function ticketLoader({ params }) {
