@@ -2,18 +2,20 @@ const apiUrl = import.meta.env.VITE_API_BASE_URL;
 import { getAuthToken } from './authAction';
 
 export async function homeLoader({ request }) {
-  // URLSearchParams를 사용하여 현재 요청의 쿼리 파라미터를 가져옵니다.
   const url = new URL(request.url);
-  const pageNumber = url.searchParams.get('pageNumber') || 1; // 기본값: 1
-  const pageSize = url.searchParams.get('pageSize') || 20; // 기본값: 10
+  const pageNumber = url.searchParams.get('pageNumber') || 1;
+  const pageSize = url.searchParams.get('pageSize') || 20;
+  const keyword = url.searchParams.get('keyword')
+    ? url.searchParams.get('keyword')
+    : 'Latest'; // keyword 쿼리 파라미터 추가
 
+  console.log(keyword);
   try {
     const response = await fetch(
-      `${apiUrl}/api/tickets/view/all?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+      `${apiUrl}/api/tickets/view/all?pageNumber=${pageNumber}&pageSize=${pageSize}&keyword=${keyword}`,
       {
         method: 'GET',
         headers: {
-          // Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       }
@@ -22,11 +24,11 @@ export async function homeLoader({ request }) {
     if (!response.ok) {
       throw new Error('Failed to fetch tickets');
     }
-    const ticketData = await response.json(); // JSON 데이터를 ticketData 변수에 할당
-    return ticketData.data; // 받아온 데이터를 반환
+    const ticketData = await response.json();
+    return ticketData.data;
   } catch (error) {
     console.error('Error fetching tickets:', error);
-    throw error; // 에러 발생 시 호출한 쪽으로 에러를 던짐
+    throw error;
   }
 }
 

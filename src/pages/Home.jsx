@@ -1,17 +1,23 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import HomeProduct from '../components/HomeProduct';
 import { getCurrentItems, getTotalPages } from '../utils/pagination';
 import { useEffect, useState } from 'react';
 import PageButtons from '../components/PageButtons';
+import Dropdown from '../components/DropDownButton';
 
 export default function Home() {
   const ticketsData = useLoaderData(); // loader에서 가져온 데이터 사용
+  const navigate = useNavigate();
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialPage = Number(urlParams.get('pageNumber')) || 1;
+  const initialPageSize = Number(urlParams.get('pageSize')) || 4;
+  const initialKeyword = urlParams.get('keyword') || 'Latest';
+
+  const [currentPage, setCurrentPage] = useState(initialPage);
   const [viewall, setViewAll] = useState(false);
-  const [ticketsPerPage, setTicketsPerPage] = useState(4);
-
-  // console.log(ticketsData);
+  const [ticketsPerPage, setTicketsPerPage] = useState(initialPageSize);
+  const [keyword, setKeyword] = useState(initialKeyword); // keyword 상태 추가
 
   const totalPages = getTotalPages(ticketsData, ticketsPerPage);
   const currentTickets = getCurrentItems(
@@ -20,11 +26,25 @@ export default function Home() {
     ticketsPerPage
   );
 
-  // console.log(currentTickets);
-
   useEffect(() => {
     window.scrollTo(0, 0); // 페이지 변경 시 스크롤을 맨 위로 이동
   }, [currentPage]);
+
+  useEffect(() => {
+    const params = new URLSearchParams({
+      pageNumber: currentPage,
+      pageSize: ticketsPerPage,
+    });
+
+    if (keyword) {
+      params.append('keyword', keyword);
+    }
+
+    const newUrl = `?${params.toString()}`;
+    if (newUrl !== window.location.search) {
+      navigate(newUrl, { replace: true }); // URL이 변경될 때만 navigate
+    }
+  }, [keyword, currentPage, ticketsPerPage, navigate]);
 
   return (
     <div className="relative bg-white min-h-screen">
@@ -34,6 +54,9 @@ export default function Home() {
             NEW ARRIVALS
           </div>
         )}
+        <div className="flex flex-wrap justify-start mx-4">
+          <Dropdown onSelect={setKeyword} />
+        </div>
         <div className="flex flex-wrap justify-start gap-3">
           {currentTickets.map(ticket => (
             <HomeProduct key={ticket.ticketId} ticket={ticket} />

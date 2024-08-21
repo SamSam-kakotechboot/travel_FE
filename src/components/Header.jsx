@@ -15,14 +15,14 @@ export default function Header() {
         >
           SamSam
         </div>
-        <div className="flex flex-1 items-center bg-[#F0F0F0] rounded-full mx-8 px-4">
+        {/* <div className="flex flex-1 items-center bg-[#F0F0F0] rounded-full mx-8 px-4">
           <span className="material-icons text-gray-400 mr-2">search</span>
           <input
             type="text"
             placeholder="Search for products..."
             className="flex-1 py-2 bg-transparent outline-none text-base font-poppins"
           />
-        </div>
+        </div> */}
         <div className="flex items-center gap-6">
           <CartIcon isClickable={true} onClick={() => navigate('/cart')} />
           <AccountIcon isClickable={true} onClick={() => navigate('/login')} />
