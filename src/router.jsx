@@ -8,11 +8,13 @@ import MyPage from './pages/MyPage';
 import { cartAuthLoader, loginAuthLoader } from './utils/authAction';
 import { homeLoader, myPageLoader, ticketLoader } from './utils/loader';
 import { cartAction, ticketDetailAction } from './utils/actions';
+import ErrorPage from './pages/ErrorPage';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home />, loader: homeLoader },
       { path: 'login', element: <Login />, loader: loginAuthLoader },
