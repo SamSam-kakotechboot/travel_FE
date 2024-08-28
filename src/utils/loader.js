@@ -1,34 +1,49 @@
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
-import { getAuthToken } from './authAction';
+import { checkMasterAccess, getAuthToken } from './authAction';
 import { json } from 'react-router-dom';
-import { getUrlParams } from './urlParam';
+import { getUrlParams2 } from './urlParam';
 
-export async function homeLoader({ request }) {
+// URL 파라미터를 처리하는 함수
+function getQueryString(request) {
   const url = new URL(request.url);
-  const params = getUrlParams(url.searchParams);
+  const params = getUrlParams2(url.searchParams);
+  return new URLSearchParams(params).toString();
+}
 
-  const queryString = new URLSearchParams(params).toString();
-
-  try {
-    const response = await fetch(
-      `${apiUrl}/api/tickets/view/all?${queryString}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+// 티켓 데이터를 가져오는 함수
+async function fetchTickets(queryString) {
+  const response = await fetch(
+    `${apiUrl}/api/tickets/view/all?${queryString}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }
+  );
 
-    const responseData = await response.json();
-    return json({
-      tickets: responseData.data.tickets,
-      totalCount: responseData.data.totalItems,
-    });
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
+}
+
+// 응답 데이터를 처리하는 함수
+function processTicketData(responseData) {
+  return {
+    tickets: responseData.data.tickets,
+    totalCount: responseData.data.totalItems,
+  };
+}
+
+// 메인 로더 함수
+export async function homeLoader({ request }) {
+  try {
+    const queryString = getQueryString(request);
+    const responseData = await fetchTickets(queryString);
+    const processedData = processTicketData(responseData);
+    return json(processedData);
   } catch (error) {
     console.error('Error fetching tickets:', error);
     throw json({ message: 'Failed to fetch tickets' }, { status: 500 });
@@ -64,42 +79,81 @@ export async function ticketLoader({ params }) {
 
 export async function myPageLoader() {
   const token = getAuthToken();
-
   try {
-    // Making two API requests concurrently
-    const [ordersResponse, reviewsResponse] = await Promise.all([
-      fetch(`${apiUrl}/api/orders`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      }),
-      fetch(`${apiUrl}/api/review/view/my`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      }),
+    const [ordersData, reviewsData] = await Promise.all([
+      fetchOrders(token),
+      fetchReviews(token),
     ]);
 
-    // Check if both requests were successful
-    if (!ordersResponse.ok || !reviewsResponse.ok) {
-      throw new Error('Failed to fetch orders or reviews');
-    }
-
-    // Parse JSON responses
-    const ordersData = await ordersResponse.json();
-    const reviewsData = await reviewsResponse.json();
-
-    // Return both pieces of data
     return {
-      orders: ordersData.data, // Assuming the response structure contains the data you need
-      reviews: reviewsData.data, // Adjust as necessary
+      orders: ordersData.data,
+      reviews: reviewsData.data,
     };
   } catch (error) {
     console.error('Error fetching orders or reviews:', error);
-    return { orders: null, reviews: null }; // Return null for both if there was an error
+    return { orders: null, reviews: null };
   }
+}
+
+export async function ProductLoader({ request }) {
+  const token = getAuthToken();
+  try {
+    const [ticketsData, ordersData] = await Promise.all([
+      fetchTickets(getQueryString(request)),
+      fetchOrdersbyMaster(token),
+    ]);
+
+    return json({
+      tickets: ticketsData.data.tickets,
+      totalCount: ticketsData.data.totalItems,
+      orders: ordersData.data,
+    });
+  } catch (error) {
+    console.error('Error fetching tickets or reviews:', error);
+    throw json({ message: 'Failed to fetch data' }, { status: 500 });
+  }
+}
+
+// 주문 데이터 요청 함수
+async function fetchOrders(token) {
+  const response = await fetch(`${apiUrl}/api/orders`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error('Failed to fetch orders');
+  }
+  return response.json();
+}
+
+// 리뷰 데이터 요청 함수
+async function fetchReviews(token) {
+  const response = await fetch(`${apiUrl}/api/review/view/my`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error('Failed to fetch reviews');
+  }
+  return response.json();
+}
+
+async function fetchOrdersbyMaster(token) {
+  const response = await fetch(`${apiUrl}/api/orders/master`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error('Failed to fetch orders');
+  }
+  return response.json();
 }

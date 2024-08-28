@@ -13,3 +13,11 @@ export function getUrlParams(searchParams) {
     keyword: searchParams.get('keyword') || DEFAULT_PARAMS.keyword,
   };
 }
+
+export function getUrlParams2(searchParams) {
+  return {
+    pageNumber: searchParams.get('pageNumber') || DEFAULT_PARAMS.pageNumber,
+    pageSize: searchParams.get('pageSize') || '7',
+    keyword: searchParams.get('keyword') || DEFAULT_PARAMS.keyword,
+  };
+}

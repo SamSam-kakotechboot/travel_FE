@@ -10,13 +10,12 @@ const useFetchImage = (apiUrl, imagePath) => {
       try {
         const response = await fetch(`${apiUrl}/${imagePath}`, {
           method: 'GET',
-          credentials: 'omit' // 쿠키를 포함하지 않도록 설정
+          credentials: 'omit', // 쿠키를 포함하지 않도록 설정
         });
 
         if (!response.ok) {
           setImageSrc('/src/assets/no_image.png');
-        }
-        else{
+        } else {
           const imageBlob = await response.blob();
           const imageObjectURL = URL.createObjectURL(imageBlob);
           setImageSrc(imageObjectURL);

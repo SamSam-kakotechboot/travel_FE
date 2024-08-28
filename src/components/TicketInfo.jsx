@@ -14,7 +14,10 @@ const TicketInfo = ({ ticket }) => {
   const user = useSelector(state => state.auth.user);
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
-  const { imageSrc, loading, error } = useFetchImage(apiUrl, `api/images/${ticket.title}.png`);
+  const { imageSrc, loading, error } = useFetchImage(
+    apiUrl,
+    `api/images/${ticket.title}.png`
+  );
 
   const increaseQuantity = () => {
     setQuantity(prevQuantity => prevQuantity + 1);
@@ -79,7 +82,7 @@ const TicketInfo = ({ ticket }) => {
                 <div className="text-wrapper-ticket-keyword text-sm italic text-black text-left mr-2">
                   Keyword
                 </div>
-                <Tooltip text="사용자 리뷰에서 AI를 통해 추출된 주요 키워드입니다">
+                <Tooltip text="외부 사용자 리뷰에서 AI를 통해 추출된 주요 키워드입니다">
                   <InfoIcon className="text-black cursor-pointer" />
                 </Tooltip>
               </div>
@@ -91,7 +94,7 @@ const TicketInfo = ({ ticket }) => {
               </div>
             </div>
             <div className="text-wrapper-ticket-content text-base text-black/60 mt-3 mb-10">
-              {ticket.content}
+              {ticket.contents}
             </div>
           </div>
           <div className="gray-line w-full h-[1px] bg-gray-100 mt-5"></div>
