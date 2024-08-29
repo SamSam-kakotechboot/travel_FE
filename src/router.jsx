@@ -16,7 +16,12 @@ import {
   ProductLoader,
   ticketLoader,
 } from './utils/loader';
-import { cartAction, ticketDetailAction } from './utils/actions';
+import {
+  cartAction,
+  productAction,
+  productEditAction,
+  ticketDetailAction,
+} from './utils/actions';
 import ErrorPage from './pages/ErrorPage';
 import ProductPage from './pages/Product';
 import ProductEditPage from './pages/ProductEditPage';
@@ -33,8 +38,18 @@ export const router = createBrowserRouter([
         path: 'product',
         loader: checkMasterAccess,
         children: [
-          { index: true, element: <ProductPage />, loader: ProductLoader }, // 기본 경로에 ProductPage 렌더링
-          { path: 'edit/:ticketId', element: <ProductEditPage /> },
+          {
+            index: true,
+            element: <ProductPage />,
+            loader: ProductLoader,
+            action: productAction,
+          }, // 기본 경로에 ProductPage 렌더링
+          {
+            path: 'edit/:id',
+            element: <ProductEditPage />,
+            loader: ticketLoader,
+            action: productEditAction,
+          },
         ],
       },
       {

@@ -32,14 +32,25 @@ export default function MyOrderList({ orders }) {
               </div>
               <div className="flex-grow" />
               <div className="w-[225px] h-[124px] flex flex-col justify-center items-end mr-6 flex-shrink-0 min-w-[150px]">
-                <KeywordRectangle
-                  content="배송완료"
-                  color="bg-red-400 bg-opacity-10"
-                  textcolor="text-red-500"
-                  padX={20}
-                  height={30}
-                  className="max-w-full"
-                />
+                {order.status === 'P' ? (
+                  <KeywordRectangle
+                    content="주문 대기"
+                    color="bg-red-400 bg-opacity-10"
+                    textcolor="text-red-500"
+                    padX={20}
+                    height={30}
+                    className="max-w-full"
+                  />
+                ) : (
+                  <KeywordRectangle
+                    content="주문 승인"
+                    color="bg-green-400 bg-opacity-10"
+                    textcolor="text-green-500"
+                    padX={20}
+                    height={30}
+                    className="max-w-full"
+                  />
+                )}
               </div>
             </div>
             {index < orders.length - 1 && (
@@ -54,7 +65,10 @@ export default function MyOrderList({ orders }) {
 
 function OrderImage({ title, index }) {
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
-  const { imageSrc, loading, error } = useFetchImage(apiUrl, `api/images/${title}.png`);
+  const { imageSrc, loading, error } = useFetchImage(
+    apiUrl,
+    `api/images/${title}.png`
+  );
 
   return (
     <div className="flex-shrink-0 w-[125px] h-[154px] rounded-lg flex justify-center items-center">

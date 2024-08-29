@@ -37,12 +37,10 @@ export const apiRequest = (isSignUpMode, formData) => {
     })
     .then(jsonData => {
       if (isSignUpMode) {
-        console.log('회원가입 성공:', jsonData);
         return {
           message: `${formData.id}님, 회원가입이 완료되었습니다.`,
         };
       } else {
-        console.log('로그인 성공:', jsonData);
         return {
           token: jsonData.data.token,
           role: jsonData.data.role,

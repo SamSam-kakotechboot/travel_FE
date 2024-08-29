@@ -50,7 +50,7 @@ const ReviewForm = ({ id, orderId }) => {
     const isConfirmed = window.confirm(
       '리뷰를 등록하시겠습니까? 작성한 리뷰는 수정 및 삭제가 불가능합니다.'
     );
-  
+
     if (isConfirmed) {
       const reviewData = {
         userId: getCookie('userId'),
@@ -59,24 +59,27 @@ const ReviewForm = ({ id, orderId }) => {
         comment: inputTextRef.current.value,
         orderId: orderId,
       };
-  
+
       // 리뷰 등록 요청
       const result = await dispatch(ticketDetailAction({ reviewData }));
-  
+
       if (result.meta.requestStatus === 'fulfilled') {
         const reviewId = result.payload.data.reviewId; // 리뷰 등록 후 reviewId를 받음
-  
+
         if (uploadedFileRef.current) {
           // 이미지 업로드 요청
           const formData = new FormData();
           formData.append('image', uploadedFileRef.current); // image만 포함
-  
+
           try {
-            const uploadResponse = await fetch(`${apiUrl}/api/images/uploadReviewImage?reviewId=${reviewId}`, {
-              method: 'POST',
-              body: formData,
-            });
-  
+            const uploadResponse = await fetch(
+              `${apiUrl}/api/images/uploadReviewImage?reviewId=${reviewId}`,
+              {
+                method: 'POST',
+                body: formData,
+              }
+            );
+
             if (!uploadResponse.ok) {
               console.error('이미지 업로드 실패:', await uploadResponse.text());
             }
@@ -84,7 +87,7 @@ const ReviewForm = ({ id, orderId }) => {
             console.error('이미지 업로드 오류:', error);
           }
         }
-  
+
         navigate('/'); // 성공 시 홈으로 리다이렉트
       } else {
         console.error('리뷰 등록 실패:', result.payload);

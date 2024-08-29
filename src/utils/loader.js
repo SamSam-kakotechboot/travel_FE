@@ -1,5 +1,5 @@
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
-import { checkMasterAccess, getAuthToken } from './authAction';
+import { getAuthToken } from './authAction';
 import { json } from 'react-router-dom';
 import { getUrlParams2 } from './urlParam';
 

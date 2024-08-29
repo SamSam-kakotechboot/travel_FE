@@ -19,7 +19,6 @@ export default function LoginModal() {
     updateFormData(updatedData => {
       apiRequest(isSignUpMode, updatedData)
         .then(response => {
-          console.log(response);
           dispatch(setCredentials(response));
           navigate('/'); // 로그인 성공 시 홈으로 이동
         })
