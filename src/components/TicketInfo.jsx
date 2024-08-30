@@ -7,6 +7,7 @@ import Tooltip from './Tooltip';
 import InfoIcon from './icons/InfoIcon';
 import StarRating from './Star';
 import useFetchImage from '../hooks/useFetchImage';
+import useFetchKeywords from '../hooks/useFetchKeywords';
 
 const TicketInfo = ({ ticket }) => {
   const [quantity, setQuantity] = useState(1);
@@ -14,10 +15,17 @@ const TicketInfo = ({ ticket }) => {
   const user = useSelector(state => state.auth.user);
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
-  const { imageSrc, loading, error } = useFetchImage(
-    apiUrl,
-    `api/images/${ticket.title}.png`
-  );
+  const {
+    imageSrc,
+    loading: imageLoading,
+    error: imageError,
+  } = useFetchImage(apiUrl, `api/images/${ticket.title}.png`);
+
+  const {
+    keywords,
+    loading: keywordsLoading,
+    error: keywordsError,
+  } = useFetchKeywords(ticket.title);
 
   const increaseQuantity = () => {
     setQuantity(prevQuantity => prevQuantity + 1);
@@ -43,9 +51,9 @@ const TicketInfo = ({ ticket }) => {
       <div className="flex gap-16">
         {/* Left Image Container */}
         <div className="image-container w-[430px] h-[450px] rounded-lg object-cover">
-          {loading && <div>이미지를 불러오는 중...</div>}
-          {error && <div>{error}</div>}
-          {!loading && !error && (
+          {imageLoading && <div>이미지를 불러오는 중...</div>}
+          {imageError && <div>{imageError}</div>}
+          {!imageLoading && !imageError && (
             <img
               id="imageElement"
               className="ticket-image w-[430px] h-[450px] rounded-lg object-cover"
@@ -87,10 +95,15 @@ const TicketInfo = ({ ticket }) => {
                 </Tooltip>
               </div>
               <div className="keyword-rectangle-container flex gap-2">
-                <KeywordRectangle content="풍경" />
-                <KeywordRectangle content="명소" />
-                <KeywordRectangle content="가성비" />
-                <KeywordRectangle content="라라라라라라" />
+                {keywordsLoading ? (
+                  <div>키워드를 불러오는 중...</div>
+                ) : keywordsError ? (
+                  <div>{keywordsError}</div>
+                ) : (
+                  keywords.map((keyword, index) => (
+                    <KeywordRectangle key={index} content={keyword.keyword} />
+                  ))
+                )}
               </div>
             </div>
             <div className="text-wrapper-ticket-content text-base text-black/60 mt-3 mb-10">
