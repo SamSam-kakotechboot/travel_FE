@@ -12,6 +12,14 @@ export default function AIReview({ keywordsLoading, keywordsError, keywords }) {
     }
   }
 
+  const positive_keyword = keywords.filter(
+    keyword => keyword.type === 'positive'
+  );
+
+  const negative_keyword = keywords.filter(
+    keyword => keyword.type === 'negative'
+  );
+
   return (
     <div className="keyword-rectangle-container flex flex-wrap gap-2 max-w-full">
       {keywordsLoading ? (
@@ -22,13 +30,26 @@ export default function AIReview({ keywordsLoading, keywordsError, keywords }) {
           color="bg-purple-400 bg-opacity-50"
         />
       ) : (
-        keywords.map((keyword, index) => (
-          <KeywordRectangle
-            key={index}
-            content={keyword.keyword}
-            color={getColor(keyword.type)}
-          />
-        ))
+        <>
+          <div className="w-full flex flex-wrap gap-1">
+            {positive_keyword.map((keyword, index) => (
+              <KeywordRectangle
+                key={index}
+                content={keyword.keyword}
+                color={getColor(keyword.type)}
+              />
+            ))}
+          </div>
+          <div className="w-full flex flex-wrap gap-1">
+            {negative_keyword.map((keyword, index) => (
+              <KeywordRectangle
+                key={index}
+                content={keyword.keyword}
+                color={getColor(keyword.type)}
+              />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
