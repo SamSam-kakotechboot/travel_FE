@@ -25,14 +25,13 @@ const useFetchKeywords = filename => {
           setError(data);
         }
       } catch (err) {
-        setError('키워드 데이터를 불러오는 중 오류가 발생했습니다.');
+        setError('AI 키워드 데이터가 존재하지 않습니다.');
       } finally {
         setLoading(false);
         prevFilename.current = filename; // filename 기억하기
       }
     };
     fetchKeywords();
-    console.log(filename);
   }, [filename]);
 
   return { keywords, loading, error };

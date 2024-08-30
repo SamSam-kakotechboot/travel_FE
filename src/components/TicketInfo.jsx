@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
-import KeywordRectangle from './KeywordRectangle';
 import BlackButton from './BlackButton';
 import Tooltip from './Tooltip';
 import InfoIcon from './icons/InfoIcon';
 import StarRating from './Star';
 import useFetchImage from '../hooks/useFetchImage';
 import useFetchKeywords from '../hooks/useFetchKeywords';
+import AIReview from './AiReview';
 
 const TicketInfo = ({ ticket }) => {
   const [quantity, setQuantity] = useState(1);
@@ -94,19 +94,13 @@ const TicketInfo = ({ ticket }) => {
                   <InfoIcon className="text-black cursor-pointer" />
                 </Tooltip>
               </div>
-              <div className="keyword-rectangle-container flex gap-2">
-                {keywordsLoading ? (
-                  <div>키워드를 불러오는 중...</div>
-                ) : keywordsError ? (
-                  <div>{keywordsError}</div>
-                ) : (
-                  keywords.map((keyword, index) => (
-                    <KeywordRectangle key={index} content={keyword.keyword} />
-                  ))
-                )}
-              </div>
+              <AIReview
+                keywordsLoading={keywordsLoading}
+                keywordsError={keywordsError}
+                keywords={keywords}
+              />
             </div>
-            <div className="text-wrapper-ticket-content text-base text-black/60 mt-3 mb-10">
+            <div className="text-wrapper-ticket-content text-base text-black/60 mt-4">
               {ticket.contents}
             </div>
           </div>
