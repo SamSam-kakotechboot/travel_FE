@@ -1,12 +1,12 @@
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
 import { getAuthToken } from './authAction';
 import { json } from 'react-router-dom';
-import { getUrlParams2 } from './urlParam';
+import { getUrlParams2, getUrlParams } from './urlParam';
 
 // URL 파라미터를 처리하는 함수
 function getQueryString(request) {
   const url = new URL(request.url);
-  const params = getUrlParams2(url.searchParams);
+  const params = getUrlParams(url.searchParams);
   return new URLSearchParams(params).toString();
 }
 

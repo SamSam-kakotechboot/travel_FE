@@ -25,7 +25,7 @@ export default function ProductPage() {
   const navigate = useNavigate();
   const submit = useSubmit();
 
-  const pageSize = 7;
+  const pageSize = 8;
   const pageNumber = searchParams.get('pageNumber') || 1;
   const totalPages = useMemo(
     () => Math.ceil(totalCount / pageSize),
