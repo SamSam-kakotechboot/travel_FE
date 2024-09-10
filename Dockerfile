@@ -7,6 +7,9 @@ RUN npm install -g npm@10.8.1
 # 작업 디렉토리 설정
 WORKDIR /app
 
+# 환경 변수 설정
+ARG VITE_API_BASE_URL
+
 # package.json과 package-lock.json 복사
 COPY package*.json ./
 
@@ -15,6 +18,9 @@ RUN npm install
 
 # 소스 코드 복사
 COPY . .
+
+# 빌드 환경 변수 파일 생성
+RUN echo "VITE_API_BASE_URL=${VITE_API_BASE_URL}" > .env
 
 # 리액트 애플리케이션 빌드
 RUN npm run build
