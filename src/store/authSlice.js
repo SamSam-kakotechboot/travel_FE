@@ -23,15 +23,14 @@ const authSlice = createSlice({
       // state.isAuthenticated = true;
       state.user = user;
 
-      setCookie('token', token, 7, { secure: true, sameSite: 'Strict' });
-      setCookie('role', role, 7, { secure: true, sameSite: 'Strict' });
+      setCookie('token', token, 7, { secure: true });
+      setCookie('role', role, 7, { secure: true });
       setCookie('user', JSON.stringify(user), 7, {
         secure: true,
-        sameSite: 'Strict',
       });
+      s;
       setCookie('userId', userName, 7, {
         secure: true,
-        sameSite: 'Strict',
       });
     },
     clearCredentials: state => {
