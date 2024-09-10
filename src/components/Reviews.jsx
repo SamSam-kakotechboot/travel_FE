@@ -1,13 +1,35 @@
+// src/components/Reviews.js
 import React, { useState, useEffect } from 'react';
 import { getTotalPages, getCurrentItems } from '../utils/pagination';
 import BlackButton from './BlackButton';
 import Review from './Review';
 import PageButtons from './PageButtons';
-import reviewsData from '../testdata/review.json';
+import { reviewsHook } from '../hooks/reviewsHook';
 
 const Reviews = ({ id, onReviewButtonClick }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [reviewsData, setReviewsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const reviewsPerPage = 5;
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      const data = await reviewsHook(id);
+      setReviewsData(data || []);
+      setLoading(false);
+    };
+
+    fetchReviews();
+  }, [id]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   const totalPages = getTotalPages(reviewsData, reviewsPerPage);
   const currentReviews = getCurrentItems(
@@ -15,10 +37,6 @@ const Reviews = ({ id, onReviewButtonClick }) => {
     currentPage,
     reviewsPerPage
   );
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [currentPage]);
 
   return (
     <div className="flex justify-center">
@@ -41,15 +59,11 @@ const Reviews = ({ id, onReviewButtonClick }) => {
 
         {/* Reviews Content Section */}
         <div className="reviews-content flex flex-col items-center gap-4 p-6 rounded-lg">
-          {currentReviews.map((review, index) => (
+          {currentReviews.map(review => (
             <Review
-              key={index}
-              reviewer={review.name}
-              score={review.rating}
-              content={review.comment}
-              date={new Date(review.regDate).toLocaleDateString()}
-              imgUrl={'https://via.placeholder.com/265x170'}
-            />
+            key={review.reviewId}
+            review={review}
+          />
           ))}
         </div>
 

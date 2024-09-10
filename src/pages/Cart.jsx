@@ -1,3 +1,4 @@
+import React from 'react';
 import CartTotal from '../components/CartTotal';
 import CartIcon from '../components/icons/CartIcon';
 import CartDetail from '../components/CartDetail';
@@ -5,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 export default function Cart() {
   const user = useSelector(state => state.auth.user);
+
   return (
     <div className="relative bg-white">
       <div className="flex flex-col min-h-screen bg-white py-12 px-20">

@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
-import KeywordRectangle from './KeywordRectangle';
 import BlackButton from './BlackButton';
 import Tooltip from './Tooltip';
 import InfoIcon from './icons/InfoIcon';
-import disneylandImage from '../assets/disneyland.png';
 import StarRating from './Star';
+import useFetchImage from '../hooks/useFetchImage';
+import useFetchKeywords from '../hooks/useFetchKeywords';
+import AIReview from './AiReview';
 
 const TicketInfo = ({ ticket }) => {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
+  const {
+    imageSrc,
+    loading: imageLoading,
+    error: imageError,
+  } = useFetchImage(apiUrl, `api/images/${ticket.title}.png`);
+
+  const {
+    keywords,
+    loading: keywordsLoading,
+    error: keywordsError,
+  } = useFetchKeywords(ticket.title);
 
   const increaseQuantity = () => {
     setQuantity(prevQuantity => prevQuantity + 1);
@@ -37,11 +51,16 @@ const TicketInfo = ({ ticket }) => {
       <div className="flex gap-16">
         {/* Left Image Container */}
         <div className="image-container w-[430px] h-[450px] rounded-lg object-cover">
-          <img
-            className="ticket-image w-[430px] h-[450px] rounded-lg object-cover"
-            src={disneylandImage}
-            alt="DisneyLand Paris"
-          />
+          {imageLoading && <div>이미지를 불러오는 중...</div>}
+          {imageError && <div>{imageError}</div>}
+          {!imageLoading && !imageError && (
+            <img
+              id="imageElement"
+              className="ticket-image w-[430px] h-[450px] rounded-lg object-cover"
+              src={imageSrc}
+              alt={ticket.title}
+            />
+          )}
         </div>
 
         {/* Right Info Section */}
@@ -52,9 +71,9 @@ const TicketInfo = ({ ticket }) => {
             </div>
             {/* Star Rating Section */}
             <div className="star-wrapper flex items-center mt-2 mb-[5px] h-[30px]">
-              <StarRating rating={ticket.rating} />
+              <StarRating rating={ticket.avgRating} />
               <span className="ml-2 text-black text-sm italic">
-                {ticket.rating}/5.0
+                {ticket.avgRating}/5.0
               </span>
             </div>
             <div className="text-wrapper-ticket-price text-2xl font-bold text-black mb-[10px] text-left">
@@ -71,19 +90,18 @@ const TicketInfo = ({ ticket }) => {
                 <div className="text-wrapper-ticket-keyword text-sm italic text-black text-left mr-2">
                   Keyword
                 </div>
-                <Tooltip text="사용자 리뷰에서 AI를 통해 추출된 주요 키워드입니다">
+                <Tooltip text="외부 사용자 리뷰에서 AI를 통해 추출된 주요 키워드입니다">
                   <InfoIcon className="text-black cursor-pointer" />
                 </Tooltip>
               </div>
-              <div className="keyword-rectangle-container flex gap-2">
-                <KeywordRectangle content="풍경" />
-                <KeywordRectangle content="명소" />
-                <KeywordRectangle content="가성비" />
-                <KeywordRectangle content="라라라라라라" />
-              </div>
+              <AIReview
+                keywordsLoading={keywordsLoading}
+                keywordsError={keywordsError}
+                keywords={keywords}
+              />
             </div>
-            <div className="text-wrapper-ticket-content text-base text-black/60 mt-3 mb-10">
-              {ticket.content}
+            <div className="text-wrapper-ticket-content text-base text-black/60 mt-4">
+              {ticket.contents}
             </div>
           </div>
           <div className="gray-line w-full h-[1px] bg-gray-100 mt-5"></div>

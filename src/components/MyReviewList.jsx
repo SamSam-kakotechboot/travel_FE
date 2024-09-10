@@ -1,35 +1,82 @@
-import React from 'react';
+import React, { useState } from 'react';
+import useFetchImage from '../hooks/useFetchImage';
+import TrashCanIcon from './icons/TrashCanIcon';
+import useDeleteReview from '../hooks/reviewsHook';
 
-export default function MyReviewList() {
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
+export default function MyReviewList({ reviews }) {
+  const [deleteReviewId, setDeleteReviewId] = useState(null);
+  const deleteReview = useDeleteReview();
+
+  const handleDeleteClick = async reviewId => {
+    const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
+
+    if (confirmDelete) {
+      const success = await deleteReview(reviewId);
+      if (success) {
+        alert('리뷰 및 리뷰와 관련된 이미지가 성공적으로 삭제되었습니다.');
+        setDeleteReviewId(null); // 삭제 후 상태 초기화
+        window.location.reload(); // 페이지 새로고침으로 삭제된 상태 반영
+      } else {
+        alert('삭제 중 문제가 발생했습니다.');
+      }
+    }
+  };
+
   return (
-    <div className="flex-1 bg-white p-3 rounded-lg border border-black border-opacity-10">
-      <div className="space-y-4">
-        {[...Array(2)].map((_, index) => (
-          <div key={index}>
-            <div className="flex w-full items-start gap-4 p-3 bg-white rounded-lg">
-              <div className="rounded-lg justify-center items-center flex">
-                <img
-                  src={`https://via.placeholder.com/125x154?text=Item+${index + 1}`}
-                  alt={`Item ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="flex flex-col justify-start items-start">
-                <div className="text-black text-[18px] font-bold break-words">
-                  LEGOLAND KOREA
+    <div className="flex-1 bg-white p-3 rounded-lg border border-black border-opacity-10 min-w-144">
+      <div className="space-y-4 min-w-160">
+        {reviews.map((review, index) => {
+          const { imageSrc, loading, error } = useFetchImage(
+            apiUrl,
+            `api/images/review/${review.reviewId}`
+          );
+
+          return (
+            <div key={review.reviewId}>
+              <div className="flex w-full items-start gap-4 p-3 bg-white rounded-lg">
+                <div className="flex-shrink-0 w-[125px] h-[154px] rounded-lg flex justify-center items-center">
+                  {loading && <div>이미지를 불러오는 중...</div>}
+                  {error && <div>{error}</div>}
+                  {!loading && !error && (
+                    <img
+                      src={imageSrc}
+                      alt={`Item ${review.reviewId}`}
+                      className="block w-[125px] h-[154px] object-cover rounded-lg"
+                    />
+                  )}
                 </div>
-                <div className="text-gray-500 text-[12px]">2024.07.26 작성</div>
-                <div className="text-black text-[14px] break-words mt-2">
-                  너무 재미있어요 어쩌고 저쩌고 너무 재미있어요 어쩌고 저쩌고
-                  어쩌고 저쩌고 ...
+                <div className="flex flex-col w-full justify-start items-start px-2">
+                  <div className="flex justify-between items-center w-full">
+                    <div className="text-black text-[18px] font-bold break-words flex-grow">
+                      {review.ticketId}
+                    </div>
+                    <TrashCanIcon
+                      onClick={() => handleDeleteClick(review.reviewId)}
+                      isClickable={true}
+                      className="cursor-pointer"
+                    />
+                  </div>
+                  <div className="text-gray-500 text-[12px]">
+                    {new Date(review.registDate).toLocaleDateString('ko-KR', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}{' '}
+                    작성
+                  </div>
+                  <div className="text-black text-[14px] break-words mt-2">
+                    {review.comment}
+                  </div>
                 </div>
               </div>
+              {index < 1 && ( // 전체 개수에 따라 바뀌도록 수정 필요
+                <div className="w-full h-px bg-black bg-opacity-10 opacity-50 mt-4" />
+              )}
             </div>
-            {index < 1 && ( // 전체 개수에 따라 바뀌도록 수정 필요
-              <div className="w-full h-px bg-black bg-opacity-10 opacity-50 mt-4" />
-            )}
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -1,9 +1,13 @@
+// src/components/Review.js
 import React from 'react';
 import StarIcon from './icons/StarIcon';
-import disneylandReviewImage from '../assets/disneyland_review.png';
+import useFetchImage from '../hooks/useFetchImage';
 
-const Review = ({ reviewer, score, content, date, imgUrl }) => {
-  const fullStars = Math.floor(score);
+const Review = ({ review }) => {
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+  const { imageSrc, loading, error } = useFetchImage(apiUrl, `api/images/review/${review.reviewId}`);
+
+  const fullStars = Math.floor(review.rating);
 
   return (
     <div className="review-container flex w-[790px] h-[227px] p-6 rounded-[20px] border border-gray-100 bg-white">
@@ -22,26 +26,30 @@ const Review = ({ reviewer, score, content, date, imgUrl }) => {
         {/* Review Section */}
         <div className="review-content flex flex-col h-full ml-[3px]">
           <div className="reviewer text-[14px] font-semibold mb-[8px]">
-            {reviewer}
+            {review.userName}
           </div>
           <div
             className="content text-[14px] w-[330px] mb-2"
             style={{ color: 'rgba(0, 0, 0, 0.60)' }}
           >
-            {content}
+            {review.comment}
           </div>
           <div className="date text-sm text-gray-500 mt-auto">
-            Posted on {date}
+            Posted on {new Date(review.regDate).toLocaleDateString()}
           </div>
         </div>
       </div>
       {/* Right Image Container */}
       <div className="image-container flex-shrink-0 ml-4">
-        <img
-          className="w-[265px] h-[170px] rounded-2xl object-cover"
-          src={disneylandReviewImage}
-          alt="Disneyland Review"
-        />
+        {loading && <p>Loading image...</p>}
+        {error && <p>{error}</p>}
+        {!loading && !error && (
+          <img
+            className="w-[265px] h-[170px] rounded-2xl object-cover"
+            src={imageSrc}
+            alt="Review Image"
+          />
+        )}
       </div>
     </div>
   );

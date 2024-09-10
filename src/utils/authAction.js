@@ -30,3 +30,13 @@ export function loginAuthLoader() {
   }
   return null;
 }
+
+// 접근 권한 확인 함수
+export function checkMasterAccess() {
+  const state = store.getState();
+  const role = state.auth.role;
+  if (role !== 'MASTER') {
+    return redirect('/');
+  }
+  return null;
+}

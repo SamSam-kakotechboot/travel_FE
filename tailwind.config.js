@@ -15,6 +15,12 @@ module.exports = {
         160: '40rem', // 640px
         192: '48rem', // 768px
       },
+      minWidth: {
+        128: '32rem', // 512px
+        144: '36rem', // 576px
+        160: '40rem', // 640px
+        192: '48rem', // 768px
+      },
     },
   },
   plugins: [],

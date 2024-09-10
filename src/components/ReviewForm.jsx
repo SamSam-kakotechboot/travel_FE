@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import BlackButton from './BlackButton';
 import UploadButton from './UploadButton';
 import GrayStarIcon from './icons/GrayStarIcon';
+import { getCookie } from '../utils/cookie';
+import { ticketDetailAction } from '../utils/actions';
 
-const ReviewForm = ({ id }) => {
+const ReviewForm = ({ id, orderId }) => {
   const [hoveredStars, setHoveredStars] = useState(0);
-  const [selectedStars, setSelectedStars] = useState(0);
-  const [inputText, setInputText] = useState('');
+  const [selectedStars, setSelectedStars] = useState(5);
   const [uploadedFileName, setUploadedFileName] = useState('');
-  const maxLength = 300;
+  const [inputText, setInputText] = useState('');
+  const inputTextRef = useRef(null);
+  const uploadedFileRef = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const maxLength = 300;
 
   const handleMouseEnter = index => {
     setHoveredStars(index);
@@ -22,29 +29,69 @@ const ReviewForm = ({ id }) => {
 
   const handleClick = index => {
     setSelectedStars(index);
-    console.log(`Selected stars: ${index}`);
   };
 
-  const handleChange = event => {
-    if (event.target.value.length <= maxLength) {
-      setInputText(event.target.value);
+  const handleFileChange = e => {
+    const file = e.target.files[0];
+    if (file) {
+      setUploadedFileName(file.name);
+      uploadedFileRef.current = file;
     }
   };
 
-  const handleFileChange = event => {
-    if (event.target.files.length > 0) {
-      const fileName = event.target.files[0].name;
-      setUploadedFileName(fileName);
-      console.log(`Selected file: ${fileName}`);
+  const handleInputChange = e => {
+    const text = e.target.value;
+    if (text.length <= maxLength) {
+      setInputText(text);
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const isConfirmed = window.confirm(
       '리뷰를 등록하시겠습니까? 작성한 리뷰는 수정 및 삭제가 불가능합니다.'
     );
+
     if (isConfirmed) {
-      navigate('/');
+      const reviewData = {
+        userId: getCookie('userId'),
+        ticketId: id,
+        rating: selectedStars,
+        comment: inputTextRef.current.value,
+        orderId: orderId,
+      };
+
+      // 리뷰 등록 요청
+      const result = await dispatch(ticketDetailAction({ reviewData }));
+
+      if (result.meta.requestStatus === 'fulfilled') {
+        const reviewId = result.payload.data.reviewId; // 리뷰 등록 후 reviewId를 받음
+
+        if (uploadedFileRef.current) {
+          // 이미지 업로드 요청
+          const formData = new FormData();
+          formData.append('image', uploadedFileRef.current); // image만 포함
+
+          try {
+            const uploadResponse = await fetch(
+              `${apiUrl}/api/images/uploadReviewImage?reviewId=${reviewId}`,
+              {
+                method: 'POST',
+                body: formData,
+              }
+            );
+
+            if (!uploadResponse.ok) {
+              console.error('이미지 업로드 실패:', await uploadResponse.text());
+            }
+          } catch (error) {
+            console.error('이미지 업로드 오류:', error);
+          }
+        }
+
+        navigate('/'); // 성공 시 홈으로 리다이렉트
+      } else {
+        console.error('리뷰 등록 실패:', result.payload);
+      }
     }
   };
 
@@ -52,7 +99,6 @@ const ReviewForm = ({ id }) => {
     <div>
       <div className="flex justify-center">
         <div className="form-container w-[1200px] mt-[18px] mb-[50px]">
-          {/* Header and Button Section */}
           <div className="flex items-center justify-between mb-[60px] ml-[18px] mr-[18px]">
             <div className="flex flex-col items-start">
               <h2 className="text-[19px] font-bold text-black mt-[12px]">
@@ -85,13 +131,13 @@ const ReviewForm = ({ id }) => {
             </div>
           </div>
 
-          {/* Text Box Section */}
           <div className="flex flex-col items-center mt-[30px]">
             <div className="w-[1000px] h-[400px] border border-gray-300 rounded-lg p-4">
               <textarea
                 placeholder="리뷰를 입력하세요."
+                ref={inputTextRef}
                 value={inputText}
-                onChange={handleChange}
+                onChange={handleInputChange}
                 className="w-full h-[230px] border-none outline-none resize-none p-2"
               />
               <div className="text-gray-200 mt-[30px] mb-[30px]">
