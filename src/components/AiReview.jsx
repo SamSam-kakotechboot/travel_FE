@@ -9,17 +9,19 @@ export default function AIReview({ keywordsLoading, keywordsError, keywords }) {
       case 'neutral':
         return 'bg-yellow-400 bg-opacity-50';
       default:
-        return null;
+        return 'bg-green-400 bg-opacity-50'; // positive의 기본 색상
     }
   }
 
   const positive_keyword = keywords.filter(
-    keyword => keyword.type === 'positive'
+    keyword => keyword.keyword_type === 'positive'
   );
 
   const negative_keyword = keywords.filter(
-    keyword => keyword.type === 'negative'
+    keyword => keyword.keyword_type === 'negative'
   );
+
+  console.log(keywords);
 
   return (
     <div className="keyword-rectangle-container flex flex-wrap gap-2 max-w-full">
@@ -37,7 +39,7 @@ export default function AIReview({ keywordsLoading, keywordsError, keywords }) {
               <KeywordRectangle
                 key={index}
                 content={keyword.keyword}
-                color={getColor(keyword.type)}
+                color={getColor(keyword.keyword_type)}
               />
             ))}
           </div>
@@ -46,7 +48,7 @@ export default function AIReview({ keywordsLoading, keywordsError, keywords }) {
               <KeywordRectangle
                 key={index}
                 content={keyword.keyword}
-                color={getColor(keyword.type)}
+                color={getColor(keyword.keyword_type)}
               />
             ))}
           </div>

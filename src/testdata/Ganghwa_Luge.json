@@ -1,0 +1,15 @@
+[
+  { "keyword_type": "positive", "keyword": "재미" },
+  { "keyword_type": "positive", "keyword": "가성비" },
+  { "keyword_type": "positive", "keyword": "스릴" },
+  { "keyword_type": "positive", "keyword": "경치" },
+  { "keyword_type": "positive", "keyword": "안전" },
+  { "keyword_type": "negative", "keyword": "대기 시간" },
+  { "keyword_type": "negative", "keyword": "가격" },
+  { "keyword_type": "negative", "keyword": "식당 가격" },
+  { "keyword_type": "negative", "keyword": "사고 위험" },
+  { "keyword_type": "negative", "keyword": "환불 정책" },
+  { "keyword_type": "neutral", "keyword": "코스" },
+  { "keyword_type": "neutral", "keyword": "가족 단위" },
+  { "keyword_type": "neutral", "keyword": "주말" }
+]

@@ -1,0 +1,15 @@
+[
+  { "keyword_type": "positive", "keyword": "저렴한 가격" },
+  { "keyword_type": "positive", "keyword": "편리한 입장" },
+  { "keyword_type": "positive", "keyword": "즐거운 경험" },
+  { "keyword_type": "positive", "keyword": "할로윈 분위기" },
+  { "keyword_type": "positive", "keyword": "신속한 티켓 발급" },
+  { "keyword_type": "negative", "keyword": "긴 대기 시간" },
+  { "keyword_type": "negative", "keyword": "운영 중단" },
+  { "keyword_type": "negative", "keyword": "불친절한 직원" },
+  { "keyword_type": "negative", "keyword": "혼잡한 환경" },
+  { "keyword_type": "negative", "keyword": "비싼 음식 가격" },
+  { "keyword_type": "neutral", "keyword": "방학 기간" },
+  { "keyword_type": "neutral", "keyword": "놀이기구 종류" },
+  { "keyword_type": "neutral", "keyword": "주차 편리함" }
+]

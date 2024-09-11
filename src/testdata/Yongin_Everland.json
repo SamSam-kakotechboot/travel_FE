@@ -1,0 +1,15 @@
+[
+  { "keyword_type": "positive", "keyword": "저렴한 가격" },
+  { "keyword_type": "positive", "keyword": "편리한 입장" },
+  { "keyword_type": "positive", "keyword": "즐거운 경험" },
+  { "keyword_type": "positive", "keyword": "대기 시간 짧음" },
+  { "keyword_type": "positive", "keyword": "가족 단위 방문" },
+  { "keyword_type": "negative", "keyword": "운영 중단" },
+  { "keyword_type": "negative", "keyword": "대기 시간" },
+  { "keyword_type": "negative", "keyword": "혼잡한 주말" },
+  { "keyword_type": "negative", "keyword": "식당 운영 부족" },
+  { "keyword_type": "negative", "keyword": "불만족스러운 서비스" },
+  { "keyword_type": "neutral", "keyword": "날씨" },
+  { "keyword_type": "neutral", "keyword": "주차" },
+  { "keyword_type": "neutral", "keyword": "어트랙션" }
+]

@@ -1,0 +1,15 @@
+[
+  { "keyword_type": "positive", "keyword": "아름다움" },
+  { "keyword_type": "positive", "keyword": "사진 촬영" },
+  { "keyword_type": "positive", "keyword": "신기함" },
+  { "keyword_type": "positive", "keyword": "힐링" },
+  { "keyword_type": "positive", "keyword": "다양성" },
+  { "keyword_type": "negative", "keyword": "혼잡함" },
+  { "keyword_type": "negative", "keyword": "가격" },
+  { "keyword_type": "negative", "keyword": "어지러움" },
+  { "keyword_type": "negative", "keyword": "대기 시간" },
+  { "keyword_type": "negative", "keyword": "안내 부족" },
+  { "keyword_type": "neutral", "keyword": "체험" },
+  { "keyword_type": "neutral", "keyword": "위치" },
+  { "keyword_type": "neutral", "keyword": "음료" }
+]

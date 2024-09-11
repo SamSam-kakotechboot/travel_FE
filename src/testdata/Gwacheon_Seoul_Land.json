@@ -1,0 +1,15 @@
+[
+  { "keyword_type": "positive", "keyword": "저렴한 가격" },
+  { "keyword_type": "positive", "keyword": "빠른 입장" },
+  { "keyword_type": "positive", "keyword": "아이들 놀이기구" },
+  { "keyword_type": "positive", "keyword": "즐거운 경험" },
+  { "keyword_type": "positive", "keyword": "다양한 이벤트" },
+  { "keyword_type": "negative", "keyword": "운영 중단" },
+  { "keyword_type": "negative", "keyword": "대기 시간" },
+  { "keyword_type": "negative", "keyword": "시설 노후화" },
+  { "keyword_type": "negative", "keyword": "혼잡함" },
+  { "keyword_type": "negative", "keyword": "불편한 교환 절차" },
+  { "keyword_type": "neutral", "keyword": "날씨" },
+  { "keyword_type": "neutral", "keyword": "가족 단위 방문" },
+  { "keyword_type": "neutral", "keyword": "놀이기구" }
+]

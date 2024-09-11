@@ -1,5 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 
+// JSON 데이터 import
+import ganghwaLuge from '../testdata/Ganghwa_Luge.json';
+import gangneungArteMuseum from '../testdata/Gangneung_Arte_Museum.json';
+import gwacheonSeoulLand from '../testdata/Gwacheon_Seoul_Land.json';
+import jejuAquaPlanet from '../testdata/Jeju_Aqua_Planet.json';
+import jejuArteMuseum from '../testdata/Jeju_Arte_Museum.json';
+import jejuEcoLand from '../testdata/Jeju_Eco_Land.json';
+import jejuTourPass from '../testdata/Jeju_Tour_Pass.json';
+import seoulLotteWorld from '../testdata/Seoul_Lotte_World.json';
+import seoulYeouidoCruise from '../testdata/Seoul_Yeouido_Cruise.json';
+import yonginEverland from '../testdata/Yongin_Everland.json';
+import yonginFolkVillage from '../testdata/Yongin_Folk_Village.json';
+
 const useFetchKeywords = filename => {
   const [keywords, setKeywords] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,20 +23,58 @@ const useFetchKeywords = filename => {
     if (prevFilename.current === filename) return; // 이미 호출된 filename이면 무시
 
     const fetchKeywords = async () => {
+      console.log(filename);
       try {
         setLoading(true);
-        const response = await fetch(`/src/testdata/${filename}`); // EC2 서버의 파일 경로에서 CSV 가져옴
-        const csvText = await response.text(); // CSV 파일을 텍스트 형식으로 읽음
-        const parsedData = parseCSV(csvText); // CSV 파싱 함수 호출
 
-        if (parsedData.length > 0) {
-          setKeywords(parsedData); // 파싱된 데이터 저장
+        // 미리 import한 JSON 데이터와 filename 비교
+        let jsonData;
+        switch (filename) {
+          case 'Ganghwa Luge':
+            jsonData = ganghwaLuge;
+            break;
+          case 'Gangneung Arte Museum':
+            jsonData = gangneungArteMuseum;
+            break;
+          case 'Gwacheon Seoul Land':
+            jsonData = gwacheonSeoulLand;
+            break;
+          case 'Jeju Aqua Planet':
+            jsonData = jejuAquaPlanet;
+            break;
+          case 'Jeju Arte Museum':
+            jsonData = jejuArteMuseum;
+            break;
+          case 'Jeju Eco Land':
+            jsonData = jejuEcoLand;
+            break;
+          case 'Jeju Tour Pass':
+            jsonData = jejuTourPass;
+            break;
+          case 'Seoul Lotte World':
+            jsonData = seoulLotteWorld;
+            break;
+          case 'Seoul Yeouido Cruise':
+            jsonData = seoulYeouidoCruise;
+            break;
+          case 'Yongin Everland':
+            jsonData = yonginEverland;
+            break;
+          case 'Yongin Folk Village':
+            jsonData = yonginFolkVillage;
+            break;
+          default:
+            jsonData = null; // 해당하는 JSON 파일이 없을 경우 null로 설정
+        }
+
+        if (jsonData) {
+          setKeywords(jsonData); // 해당하는 JSON 데이터를 사용
         } else {
           setKeywords([]);
-          setError('CSV 파일에서 키워드를 찾을 수 없습니다.');
+          setError('해당 JSON 파일을 찾을 수 없습니다.');
         }
       } catch (err) {
-        setError('CSV 파일을 불러오는 중 오류가 발생했습니다.');
+        setError('JSON 파일을 불러오는 중 오류가 발생했습니다.');
       } finally {
         setLoading(false);
         prevFilename.current = filename; // filename 기억하기
@@ -34,23 +85,6 @@ const useFetchKeywords = filename => {
   }, [filename]);
 
   return { keywords, loading, error };
-};
-
-// CSV 데이터를 파싱하는 함수
-const parseCSV = csvText => {
-  const rows = csvText.split('\n'); // 줄바꿈으로 데이터 분리
-  const result = [];
-
-  for (let i = 1; i < rows.length; i++) {
-    const columns = rows[i].split(','); // 콤마로 열 분리
-    if (columns.length === 2) {
-      const keyword = columns[0].replace(/"/g, ''); // " 제거
-      const type = columns[1].trim();
-      result.push({ keyword, type }); // 키워드와 타입을 객체로 저장
-    }
-  }
-
-  return result; // 파싱된 데이터 반환
 };
 
 export default useFetchKeywords;

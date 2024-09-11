@@ -1,0 +1,15 @@
+[
+  { "keyword_type": "positive", "keyword": "가성비" },
+  { "keyword_type": "positive", "keyword": "편리함" },
+  { "keyword_type": "positive", "keyword": "다양한 체험" },
+  { "keyword_type": "positive", "keyword": "친절한 서비스" },
+  { "keyword_type": "positive", "keyword": "즐거운 경험" },
+  { "keyword_type": "negative", "keyword": "예약 어려움" },
+  { "keyword_type": "negative", "keyword": "시간 제한" },
+  { "keyword_type": "negative", "keyword": "불친절한 업체" },
+  { "keyword_type": "negative", "keyword": "추가 비용" },
+  { "keyword_type": "negative", "keyword": "체험 시간 짧음" },
+  { "keyword_type": "neutral", "keyword": "관광지" },
+  { "keyword_type": "neutral", "keyword": "커피" },
+  { "keyword_type": "neutral", "keyword": "가족 여행" }
+]

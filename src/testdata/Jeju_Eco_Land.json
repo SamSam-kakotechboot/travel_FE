@@ -1,0 +1,15 @@
+[
+  { "keyword_type": "positive", "keyword": "사진찍기 좋은 곳" },
+  { "keyword_type": "positive", "keyword": "기차 여행" },
+  { "keyword_type": "positive", "keyword": "가족 단위 여행" },
+  { "keyword_type": "positive", "keyword": "자연" },
+  { "keyword_type": "positive", "keyword": "친절한 직원" },
+  { "keyword_type": "negative", "keyword": "입장 대기 시간" },
+  { "keyword_type": "negative", "keyword": "볼거리 부족" },
+  { "keyword_type": "negative", "keyword": "날씨" },
+  { "keyword_type": "negative", "keyword": "비 오는 날" },
+  { "keyword_type": "negative", "keyword": "시설 노후화" },
+  { "keyword_type": "neutral", "keyword": "테마 구역" },
+  { "keyword_type": "neutral", "keyword": "체험 프로그램" },
+  { "keyword_type": "neutral", "keyword": "계절" }
+]

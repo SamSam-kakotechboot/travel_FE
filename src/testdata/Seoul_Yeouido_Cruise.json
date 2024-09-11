@@ -1,0 +1,15 @@
+[
+  { "keyword_type": "positive", "keyword": "야경" },
+  { "keyword_type": "positive", "keyword": "음식" },
+  { "keyword_type": "positive", "keyword": "재즈 음악" },
+  { "keyword_type": "positive", "keyword": "분위기" },
+  { "keyword_type": "positive", "keyword": "할인" },
+  { "keyword_type": "negative", "keyword": "혼잡" },
+  { "keyword_type": "negative", "keyword": "추위" },
+  { "keyword_type": "negative", "keyword": "음식 질" },
+  { "keyword_type": "negative", "keyword": "짧은 시간" },
+  { "keyword_type": "negative", "keyword": "매연" },
+  { "keyword_type": "neutral", "keyword": "데이트" },
+  { "keyword_type": "neutral", "keyword": "가족" },
+  { "keyword_type": "neutral", "keyword": "예약" }
+]

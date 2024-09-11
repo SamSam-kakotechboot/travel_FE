@@ -1,0 +1,15 @@
+[
+  { "keyword_type": "positive", "keyword": "저렴한 가격" },
+  { "keyword_type": "positive", "keyword": "다양한 체험" },
+  { "keyword_type": "positive", "keyword": "빠른 입장" },
+  { "keyword_type": "positive", "keyword": "가족 단위 방문" },
+  { "keyword_type": "positive", "keyword": "즐거운 공연" },
+  { "keyword_type": "negative", "keyword": "추가 비용" },
+  { "keyword_type": "negative", "keyword": "음식 질" },
+  { "keyword_type": "negative", "keyword": "주차 문제" },
+  { "keyword_type": "negative", "keyword": "혼잡함" },
+  { "keyword_type": "negative", "keyword": "시설 노후화" },
+  { "keyword_type": "neutral", "keyword": "가을 단풍" },
+  { "keyword_type": "neutral", "keyword": "놀이기구" },
+  { "keyword_type": "neutral", "keyword": "관람 시간" }
+]

@@ -1,0 +1,15 @@
+[
+  { "keyword_type": "positive", "keyword": "재미있다" },
+  { "keyword_type": "positive", "keyword": "가격 저렴" },
+  { "keyword_type": "positive", "keyword": "다양한 볼거리" },
+  { "keyword_type": "positive", "keyword": "편리한 예약" },
+  { "keyword_type": "positive", "keyword": "가족과 함께" },
+  { "keyword_type": "negative", "keyword": "주차 문제" },
+  { "keyword_type": "negative", "keyword": "기대 이하" },
+  { "keyword_type": "negative", "keyword": "사람 많음" },
+  { "keyword_type": "negative", "keyword": "공연 미비" },
+  { "keyword_type": "negative", "keyword": "냄새 문제" },
+  { "keyword_type": "neutral", "keyword": "전시관" },
+  { "keyword_type": "neutral", "keyword": "관람 시간" },
+  { "keyword_type": "neutral", "keyword": "기후" }
+]

@@ -1,0 +1,15 @@
+[
+  { "keyword_type": "positive", "keyword": "아름다움" },
+  { "keyword_type": "positive", "keyword": "볼거리" },
+  { "keyword_type": "positive", "keyword": "사진 촬영" },
+  { "keyword_type": "positive", "keyword": "힐링" },
+  { "keyword_type": "positive", "keyword": "추천" },
+  { "keyword_type": "negative", "keyword": "혼잡" },
+  { "keyword_type": "negative", "keyword": "티바 음료" },
+  { "keyword_type": "negative", "keyword": "안내 부족" },
+  { "keyword_type": "negative", "keyword": "불쾌한 냄새" },
+  { "keyword_type": "negative", "keyword": "전산 오류" },
+  { "keyword_type": "neutral", "keyword": "가격" },
+  { "keyword_type": "neutral", "keyword": "관람 시간" },
+  { "keyword_type": "neutral", "keyword": "가족" }
+]
