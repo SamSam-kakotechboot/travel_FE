@@ -19,6 +19,7 @@ async function fetchTickets(queryString) {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include', // 인증 정보 포함
     }
   );
 
