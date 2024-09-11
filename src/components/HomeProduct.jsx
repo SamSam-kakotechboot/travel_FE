@@ -20,7 +20,9 @@ export default function HomeProduct({ ticket }) {
           className="w-full h-full object-cover rounded-xl"
           src={`https://ktbsamsambucket.s3.ap-northeast-2.amazonaws.com/ticket/${ticket.title}.png`}
           alt={ticket.title}
-          onError={e => (e.target.src = '/src/assets/no_image.png')} // 이미지 로드 실패 시 기본 이미지로 대체
+          onError={e =>
+            (e.target.src = `https://ktbsamsambucket.s3.ap-northeast-2.amazonaws.com/no_image.png`)
+          } // 이미지 로드 실패 시 대체 이미지
         />
       </div>
       <div className="text-black text-lg font-poppins font-bold mt-4">

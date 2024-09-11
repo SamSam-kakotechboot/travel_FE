@@ -1,6 +1,5 @@
 import React from 'react';
 import KeywordRectangle from './KeywordRectangle';
-import useFetchImage from '../hooks/useFetchImage'; // 커스텀 훅을 import
 
 export default function MyOrderList({ orders }) {
   return (
@@ -64,23 +63,16 @@ export default function MyOrderList({ orders }) {
 }
 
 function OrderImage({ title, index }) {
-  const apiUrl = import.meta.env.VITE_API_BASE_URL;
-  const { imageSrc, loading, error } = useFetchImage(
-    apiUrl,
-    `/ticket/${title}.png`
-  );
-
   return (
     <div className="flex-shrink-0 w-[125px] h-[154px] rounded-lg flex justify-center items-center">
-      {loading && <div>이미지를 불러오는 중...</div>}
-      {error && <div>{error}</div>}
-      {!loading && !error && (
-        <img
-          src={imageSrc}
-          alt={`Item ${index + 1}`}
-          className="block w-full h-full object-cover rounded-lg"
-        />
-      )}
+      <img
+        src={`https://ktbsamsambucket.s3.ap-northeast-2.amazonaws.com/ticket/${title}.png`}
+        alt={`Item ${index + 1}`}
+        className="block w-full h-full object-cover rounded-lg"
+        onError={e =>
+          (e.target.src = `https://ktbsamsambucket.s3.ap-northeast-2.amazonaws.com/no_image.png`)
+        } // 이미지 로드 실패 시 대체 이미지
+      />
     </div>
   );
 }

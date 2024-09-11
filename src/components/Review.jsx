@@ -1,12 +1,8 @@
 // src/components/Review.js
 import React from 'react';
 import StarIcon from './icons/StarIcon';
-import useFetchImage from '../hooks/useFetchImage';
 
 const Review = ({ review }) => {
-  const apiUrl = import.meta.env.VITE_API_BASE_URL;
-  const { imageSrc, loading, error } = useFetchImage(apiUrl, `api/images/review/${review.reviewId}`);
-
   const fullStars = Math.floor(review.rating);
 
   return (
@@ -41,15 +37,14 @@ const Review = ({ review }) => {
       </div>
       {/* Right Image Container */}
       <div className="image-container flex-shrink-0 ml-4">
-        {loading && <p>Loading image...</p>}
-        {error && <p>{error}</p>}
-        {!loading && !error && (
-          <img
-            className="w-[265px] h-[170px] rounded-2xl object-cover"
-            src={imageSrc}
-            alt="Review Image"
-          />
-        )}
+        <img
+          className="w-[265px] h-[170px] rounded-2xl object-cover"
+          src={`https://ktbsamsambucket.s3.ap-northeast-2.amazonaws.com/review/${review.reviewId}`}
+          alt="Review Image"
+          onError={e =>
+            (e.target.src = `https://ktbsamsambucket.s3.ap-northeast-2.amazonaws.com/no_image.png`)
+          } // 이미지 로드 실패 시 대체 이미지
+        />
       </div>
     </div>
   );

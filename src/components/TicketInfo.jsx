@@ -5,7 +5,6 @@ import BlackButton from './BlackButton';
 import Tooltip from './Tooltip';
 import InfoIcon from './icons/InfoIcon';
 import StarRating from './Star';
-import useFetchImage from '../hooks/useFetchImage';
 import useFetchKeywords from '../hooks/useFetchKeywords';
 import AIReview from './AiReview';
 
@@ -13,13 +12,6 @@ const TicketInfo = ({ ticket }) => {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
-  const apiUrl = import.meta.env.VITE_API_BASE_URL;
-
-  const {
-    imageSrc,
-    loading: imageLoading,
-    error: imageError,
-  } = useFetchImage(apiUrl, `/ticket/${ticket.title}.png`);
 
   const {
     keywords,
@@ -51,16 +43,15 @@ const TicketInfo = ({ ticket }) => {
       <div className="flex gap-16">
         {/* Left Image Container */}
         <div className="image-container w-[430px] h-[450px] rounded-lg object-cover">
-          {imageLoading && <div>이미지를 불러오는 중...</div>}
-          {imageError && <div>{imageError}</div>}
-          {!imageLoading && !imageError && (
-            <img
-              id="imageElement"
-              className="ticket-image w-[430px] h-[450px] rounded-lg object-cover"
-              src={imageSrc}
-              alt={ticket.title}
-            />
-          )}
+          <img
+            id="imageElement"
+            className="ticket-image w-[430px] h-[450px] rounded-lg object-cover"
+            src={`https://ktbsamsambucket.s3.ap-northeast-2.amazonaws.com/ticket/${ticket.title}`}
+            alt={ticket.title}
+            onError={e =>
+              (e.target.src = `https://ktbsamsambucket.s3.ap-northeast-2.amazonaws.com/no_image.png`)
+            } // 이미지 로드 실패 시 대체 이미지
+          />
         </div>
 
         {/* Right Info Section */}

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useFetchImage from '../hooks/useFetchImage';
 import TrashCanIcon from './icons/TrashCanIcon';
 import useDeleteReview from '../hooks/reviewsHook';
 
@@ -28,24 +27,18 @@ export default function MyReviewList({ reviews }) {
     <div className="flex-1 bg-white p-3 rounded-lg border border-black border-opacity-10 min-w-144">
       <div className="space-y-4 min-w-160">
         {reviews.map((review, index) => {
-          const { imageSrc, loading, error } = useFetchImage(
-            apiUrl,
-            `api/images/review/${review.reviewId}`
-          );
-
           return (
             <div key={review.reviewId}>
               <div className="flex w-full items-start gap-4 p-3 bg-white rounded-lg">
                 <div className="flex-shrink-0 w-[125px] h-[154px] rounded-lg flex justify-center items-center">
-                  {loading && <div>이미지를 불러오는 중...</div>}
-                  {error && <div>{error}</div>}
-                  {!loading && !error && (
-                    <img
-                      src={imageSrc}
-                      alt={`Item ${review.reviewId}`}
-                      className="block w-[125px] h-[154px] object-cover rounded-lg"
-                    />
-                  )}
+                  <img
+                    src={`https://ktbsamsambucket.s3.ap-northeast-2.amazonaws.com/review/${review.reviewId}`}
+                    alt={`Item ${review.reviewId}`}
+                    className="block w-[125px] h-[154px] object-cover rounded-lg"
+                    onError={e =>
+                      (e.target.src = `https://ktbsamsambucket.s3.ap-northeast-2.amazonaws.com/no_image.png`)
+                    } // 이미지 로드 실패 시 대체 이미지
+                  />
                 </div>
                 <div className="flex flex-col w-full justify-start items-start px-2">
                   <div className="flex justify-between items-center w-full">
