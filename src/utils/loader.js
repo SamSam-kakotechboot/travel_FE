@@ -12,6 +12,10 @@ function getQueryString(request) {
 
 // 티켓 데이터를 가져오는 함수
 async function fetchTickets(queryString) {
+  const test_response = await fetch(`${apiUrl}/test`);
+
+  console.log(test_response);
+
   const response = await fetch(
     `${apiUrl}/api/tickets/view/all?${queryString}`,
     {
@@ -19,7 +23,7 @@ async function fetchTickets(queryString) {
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include', // 인증 정보 포함
+      credentials: 'omit', // 인증 정보 포함
     }
   );
 
@@ -63,6 +67,7 @@ export async function ticketLoader({ params }) {
           // Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
       }
     );
 
@@ -122,6 +127,7 @@ async function fetchOrders(token) {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
+      credentials: 'include',
     },
   });
   if (!response.ok) {
@@ -137,6 +143,7 @@ async function fetchReviews(token) {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
+      credentials: 'include',
     },
   });
   if (!response.ok) {
@@ -151,6 +158,7 @@ async function fetchOrdersbyMaster(token) {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
+      credentials: 'include',
     },
   });
   if (!response.ok) {
