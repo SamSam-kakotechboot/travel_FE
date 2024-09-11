@@ -1,3 +1,4 @@
+import React from 'react';
 import KeywordRectangle from './KeywordRectangle';
 
 export default function AIReview({ keywordsLoading, keywordsError, keywords }) {

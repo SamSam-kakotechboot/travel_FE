@@ -46,7 +46,7 @@ const TicketInfo = ({ ticket }) => {
           <img
             id="imageElement"
             className="ticket-image w-[430px] h-[450px] rounded-lg object-cover"
-            src={`https://ktbsamsambucket.s3.ap-northeast-2.amazonaws.com/ticket/${ticket.title}`}
+            src={`https://ktbsamsambucket.s3.ap-northeast-2.amazonaws.com/ticket/${ticket.title}.png`}
             alt={ticket.title}
             onError={e =>
               (e.target.src = `https://ktbsamsambucket.s3.ap-northeast-2.amazonaws.com/no_image.png`)
