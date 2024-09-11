@@ -8,7 +8,10 @@ export default function HomeProduct({ ticket }) {
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
   // useFetchImage 훅을 사용하여 이미지를 비동기적으로 불러오기
-  const { imageSrc, loading, error } = useFetchImage(apiUrl, `api/images/${ticket.title}.png`);
+  const { imageSrc, loading, error } = useFetchImage(
+    apiUrl,
+    `/ticket/${ticket.title}.png`
+  );
 
   const handleProductClick = () => {
     navigate(`/tickets/${ticket.ticketId}`);

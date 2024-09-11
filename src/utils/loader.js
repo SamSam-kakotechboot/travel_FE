@@ -12,10 +12,6 @@ function getQueryString(request) {
 
 // 티켓 데이터를 가져오는 함수
 async function fetchTickets(queryString) {
-  const test_response = await fetch(`${apiUrl}/test`);
-
-  console.log(test_response);
-
   const response = await fetch(
     `${apiUrl}/api/tickets/view/all?${queryString}`,
     {
@@ -23,7 +19,7 @@ async function fetchTickets(queryString) {
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'omit', // 인증 정보 포함
+      credentials: 'include', // 인증 정보 포함
     }
   );
 

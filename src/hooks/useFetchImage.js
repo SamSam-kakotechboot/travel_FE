@@ -8,10 +8,13 @@ const useFetchImage = (apiUrl, imagePath) => {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const response = await fetch(`${apiUrl}/${imagePath}`, {
-          method: 'GET',
-          credentials: 'omit', // 쿠키를 포함하지 않도록 설정
-        });
+        const response = await fetch(
+          `https://ktbsamsambucket.s3.ap-northeast-2.amazonaws.com/${imagePath}`,
+          {
+            method: 'GET',
+            credentials: 'omit', // 쿠키를 포함하지 않도록 설정
+          }
+        );
 
         if (!response.ok) {
           setImageSrc('/src/assets/no_image.png');

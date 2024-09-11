@@ -19,7 +19,7 @@ const TicketInfo = ({ ticket }) => {
     imageSrc,
     loading: imageLoading,
     error: imageError,
-  } = useFetchImage(apiUrl, `api/images/${ticket.title}.png`);
+  } = useFetchImage(apiUrl, `/ticket/${ticket.title}.png`);
 
   const {
     keywords,
